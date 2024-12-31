@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:money_tracker_app/screens/home/views/home_screen.dart';
 import 'package:money_tracker_app/utils/theme.dart';
 
 class MyAppView extends StatelessWidget {
@@ -12,6 +13,7 @@ class MyAppView extends StatelessWidget {
       themeMode: ThemeMode.system,
       theme: MAppTheme.lightTheme,
       darkTheme: MAppTheme.darkTheme,
+      home: const HomeScreen(),
     );
   }
 }
