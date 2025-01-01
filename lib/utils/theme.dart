@@ -13,6 +13,7 @@ class MAppTheme {
       primary: MColors.primary,
       secondary: MColors.secondary,
       tertiary: MColors.tertiary,
+      outline: Colors.grey.shade400,
     ),
   );
 

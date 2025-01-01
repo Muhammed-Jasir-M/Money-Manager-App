@@ -10,4 +10,6 @@ class MColors {
   static const primary = Color(0xFF00B2E7);
   static const secondary = Color(0xFFE064F7);
   static const tertiary = Color(0xFFFF8D6C);
+
+  static const outline = Color(0xFFBDBDBD);
 }

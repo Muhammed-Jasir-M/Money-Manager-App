@@ -11,6 +11,7 @@ class MAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.leadingIcon,
     this.actions,
     this.leadingOnPressed,
+    this.leadingWidget,
   });
 
   final Widget? title;
@@ -18,6 +19,7 @@ class MAppBar extends StatelessWidget implements PreferredSizeWidget {
   final IconData? leadingIcon;
   final List<Widget>? actions;
   final VoidCallback? leadingOnPressed;
+  final Widget? leadingWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +42,7 @@ class MAppBar extends StatelessWidget implements PreferredSizeWidget {
                     onPressed: leadingOnPressed,
                     icon: Icon(leadingIcon),
                   )
-                : null,
+                : leadingWidget,
         title: title,
         actions: actions,
       ),
