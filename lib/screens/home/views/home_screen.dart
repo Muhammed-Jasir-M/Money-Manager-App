@@ -1,11 +1,10 @@
-import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:money_tracker_app/screens/home/views/main_screen.dart';
+import 'package:money_tracker_app/screens/home/widgets/bottom_navbar.dart';
+import 'package:money_tracker_app/screens/home/widgets/floating_button.dart';
 import 'package:money_tracker_app/utils/constants/colors.dart';
 import 'package:money_tracker_app/widgets/appbar.dart';
-import 'package:money_tracker_app/widgets/bottom_navbar.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -37,6 +36,7 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
         title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               'Welcome!',
@@ -46,6 +46,7 @@ class HomeScreen extends StatelessWidget {
                 color: MColors.outline,
               ),
             ),
+            const SizedBox(height: 5),
             Text(
               'Jasir',
               style: TextStyle(
@@ -59,35 +60,18 @@ class HomeScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(CupertinoIcons.settings),
+            icon: Icon(
+              CupertinoIcons.settings,
+              size: 35,
+            ),
           ),
         ],
       ),
       // bottom navbar
       bottomNavigationBar: MBottomNavbar(),
       // floating action button in navbar center
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: MColors.primary,
-        onPressed: () {},
-        shape: CircleBorder(),
-        child: Container(
-          width: 60,
-          height: 60,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            gradient: LinearGradient(
-              colors: [
-                MColors.primary,
-                MColors.secondary,
-                MColors.tertiary,
-              ],
-              transform: GradientRotation(pi / 4),
-            ),
-          ),
-          child: Icon(CupertinoIcons.add),
-        ),
-      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: MFloatingActionButton(),
       body: MainScreen(),
     );
   }

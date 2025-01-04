@@ -7,6 +7,7 @@ class MAppTheme {
     brightness: Brightness.light,
     primaryColor: MColors.primary,
     scaffoldBackgroundColor: MColors.bgLight,
+    appBarTheme: AppBarTheme(backgroundColor: MColors.bgLight),
     colorScheme: ColorScheme.light(
       surface: MColors.bgLight,
       onSurface: MColors.black,
@@ -22,6 +23,7 @@ class MAppTheme {
     brightness: Brightness.dark,
     primaryColor: MColors.primary,
     scaffoldBackgroundColor: MColors.bgDark,
+    appBarTheme: AppBarTheme(backgroundColor: MColors.bgDark),
     colorScheme: ColorScheme.dark(
       surface: MColors.bgDark,
       onSurface: MColors.white,

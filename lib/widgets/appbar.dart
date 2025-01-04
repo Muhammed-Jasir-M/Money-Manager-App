@@ -26,15 +26,17 @@ class MAppBar extends StatelessWidget implements PreferredSizeWidget {
     final isDark = MHelperFunctions.isDarkMode(context);
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: MSizes.md),
+      padding: const EdgeInsets.symmetric(horizontal: MSizes.defaultSpace),
       child: AppBar(
+        elevation: 0,
         automaticallyImplyLeading: false,
+        leadingWidth: 48.0,
         leading: showBackArrow
             ? IconButton(
                 onPressed: () => Navigator.of(context).pop(),
                 icon: Icon(
                   Icons.arrow_left,
-                  color: isDark ? MColors.bgDark : MColors.bgLight,
+                  color: isDark ? MColors.black : MColors.white,
                 ),
               )
             : leadingIcon != null

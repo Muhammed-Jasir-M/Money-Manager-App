@@ -4,6 +4,9 @@ class MColors {
   static const bgLight = Color(0xFFF5F5F5);
   static const bgDark = Color(0xFF212121);
 
+  static const dark = Color(0xFF292727);
+  static const light = Color(0xFFD4C8C8);
+
   static const black = Color(0xFF000000);
   static const white = Color(0xFFFFFFFF);
 
