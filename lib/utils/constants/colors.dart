@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class MColors {
@@ -15,4 +17,22 @@ class MColors {
   static const tertiary = Color(0xFFFF8D6C);
 
   static const outline = Color(0xFFBDBDBD);
+
+  static const Gradient floatingButtonGradient = LinearGradient(
+    colors: [
+      MColors.tertiary,
+      MColors.secondary,
+      MColors.primary,
+    ],
+    transform: GradientRotation(pi / 4),
+  );
+
+  static const Gradient boxGradient = LinearGradient(
+    colors: [
+      MColors.primary,
+      MColors.secondary,
+      MColors.tertiary,
+    ],
+    transform: GradientRotation(pi / 4),
+  );
 }
