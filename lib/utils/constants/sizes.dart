@@ -26,13 +26,13 @@ class MSizes {
   static const double buttonElevation = 4.0;
 
   // Appbar Height
-  static const double appBarHeight = 56.0;
+  static const double appBarHeight = 70.0;
 
   // Image Sizes
   static const double imageThumbSize = 80.0;
 
   // Default spacing between Sections
-  static const double defaultSpace = 24.0;
+  static const double defaultSpace = 16.0;
   static const double spaceBtwItems = 16.0;
   static const double spaceBtwSections = 32.0;
 

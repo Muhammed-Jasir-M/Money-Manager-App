@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:money_tracker_app/utils/constants/colors.dart';
-import 'package:money_tracker_app/utils/constants/sizes.dart';
 import 'package:money_tracker_app/utils/helper_functions.dart';
 
 class MAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -25,29 +24,26 @@ class MAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final isDark = MHelperFunctions.isDarkMode(context);
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: MSizes.defaultSpace, vertical: MSizes.defaultSpace),
-      child: AppBar(
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        leadingWidth: 40.0,
-        leading: showBackArrow
-            ? IconButton(
-                onPressed: () => Navigator.of(context).pop(),
-                icon: Icon(
-                  Icons.arrow_left,
-                  color: isDark ? MColors.black : MColors.white,
-                ),
-              )
-            : leadingIcon != null
-                ? IconButton(
-                    onPressed: leadingOnPressed,
-                    icon: Icon(leadingIcon),
-                  )
-                : leadingWidget,
-        title: title,
-        actions: actions,
-      ),
+    return AppBar(
+      elevation: 0,
+      automaticallyImplyLeading: false,
+      leadingWidth: 40.0,
+      leading: showBackArrow
+          ? IconButton(
+              onPressed: () => Navigator.of(context).pop(),
+              icon: Icon(
+                Icons.arrow_left,
+                color: isDark ? MColors.black : MColors.white,
+              ),
+            )
+          : leadingIcon != null
+              ? IconButton(
+                  onPressed: leadingOnPressed,
+                  icon: Icon(leadingIcon),
+                )
+              : leadingWidget,
+      title: title,
+      actions: actions,
     );
   }
 
