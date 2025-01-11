@@ -26,7 +26,7 @@ class MSizes {
   static const double buttonElevation = 4.0;
 
   // Appbar Height
-  static const double appBarHeight = 70.0;
+  static const double appBarHeight = 60.0;
 
   // Image Sizes
   static const double imageThumbSize = 80.0;
