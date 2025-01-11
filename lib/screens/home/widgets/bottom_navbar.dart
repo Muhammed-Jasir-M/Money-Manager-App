@@ -17,7 +17,7 @@ class MBottomNavbar extends StatelessWidget {
       borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
       child: NavigationBar(
         height: 80,
-        backgroundColor: isDark ? MColors.dark : MColors.light,
+        backgroundColor: isDark ? MColors.dark : MColors.bgLight,
         elevation: 3,
         selectedIndex: currentIndex,
         onDestinationSelected: onIndexChange,

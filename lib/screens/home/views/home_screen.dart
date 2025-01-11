@@ -1,104 +1,55 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:money_tracker_app/screens/home/views/main_screen.dart';
-import 'package:money_tracker_app/screens/home/widgets/bottom_navbar.dart';
-import 'package:money_tracker_app/screens/home/widgets/floating_button.dart';
-import 'package:money_tracker_app/screens/stats/views/stats_screen.dart';
-import 'package:money_tracker_app/utils/constants/colors.dart';
+import 'package:money_tracker_app/data/data.dart';
+import 'package:money_tracker_app/screens/home/widgets/gradient_card.dart';
+import 'package:money_tracker_app/screens/home/widgets/home_appbar.dart';
 import 'package:money_tracker_app/utils/constants/sizes.dart';
-import 'package:money_tracker_app/widgets/appbar.dart';
+import 'package:money_tracker_app/widgets/section_heading.dart';
+import 'package:money_tracker_app/widgets/transaction_tile.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  int _currentIndex = 0;
-
-  final List<Widget> _screens = [
-    MainScreen(),
-    StatsScreen(),
-  ];
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // appbar
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(MSizes.appBarHeight),
-        child: MAppBar(
-          leadingWidget: Padding(
-            padding: EdgeInsets.only(left: MSizes.defaultSpace),
-            child: Row(
-              children: [
-                Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.yellow[700],
-                      ),
-                    ),
-                    Icon(
-                      CupertinoIcons.person_fill,
-                      color: Theme.of(context).colorScheme.outline,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          title: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Welcome!',
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                  color: MColors.outline,
-                ),
-              ),
-              const SizedBox(height: 5),
-              Text(
-                'Jasir',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.onSurface,
-                ),
-              ),
-            ],
-          ),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: MSizes.defaultSpace),
-              child: IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  CupertinoIcons.settings,
-                  size: 35,
-                ),
-              ),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: MSizes.defaultSpace,
+          vertical: MSizes.defaultSpace,
+        ),
+        child: Column(
+          children: [
+            // appbar
+            MHomeAppbar(),
+            const SizedBox(height: 20),
+
+            // Gradient Balance Card
+            MGradientBalanceCard(),
+            const SizedBox(height: 20),
+
+            // Section Heading
+            MSectionHeading(title: 'Transactions', showActionbutton: true),
+            const SizedBox(height: 20),
+
+            // Transaction Tile
+            ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: transactionsData.length,
+              itemBuilder: (context, index) {
+                return MTransactionTile(
+                  icon: transactionsData[index]['icon'],
+                  title: transactionsData[index]['title'],
+                  color: transactionsData[index]['color'],
+                  amount: transactionsData[index]['amount'],
+                  date: transactionsData[index]['date'],
+                );
+              },
             ),
           ],
         ),
       ),
-      // bottom navbar
-      bottomNavigationBar: MBottomNavbar(
-        currentIndex: _currentIndex,
-        onIndexChange: (index) => setState(() => _currentIndex = index),
-      ),
-      // floating action button in navbar center
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: MFloatingActionButton(),
-      body: _screens[_currentIndex],
     );
   }
 }

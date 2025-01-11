@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:money_tracker_app/utils/constants/colors.dart';
+import 'package:money_tracker_app/utils/constants/sizes.dart';
 import 'package:money_tracker_app/utils/helper_functions.dart';
 
 class MAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -27,7 +28,7 @@ class MAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       elevation: 0,
       automaticallyImplyLeading: false,
-      leadingWidth: 56.0,
+      leadingWidth: 36.0,
       leading: showBackArrow
           ? IconButton(
               onPressed: () => Navigator.of(context).pop(),
@@ -48,5 +49,5 @@ class MAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(MHelperFunctions.getAppBarHeight());
+  Size get preferredSize => Size.fromHeight(MSizes.appBarHeight);
 }
