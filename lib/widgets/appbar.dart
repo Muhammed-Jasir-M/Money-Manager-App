@@ -27,7 +27,7 @@ class MAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       elevation: 0,
       automaticallyImplyLeading: false,
-      leadingWidth: 40.0,
+      leadingWidth: 56.0,
       leading: showBackArrow
           ? IconButton(
               onPressed: () => Navigator.of(context).pop(),

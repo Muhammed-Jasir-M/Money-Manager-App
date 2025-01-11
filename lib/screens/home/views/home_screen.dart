@@ -17,28 +17,31 @@ class HomeScreen extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(MSizes.appBarHeight),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: MSizes.defaultSpace, vertical: 10),
+          padding: EdgeInsets.symmetric(vertical: 10),
           child: MAppBar(
-            leadingWidget: Row(
-              children: [
-                Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.yellow[700],
+            leadingWidget: Padding(
+              padding: EdgeInsets.only(left: MSizes.defaultSpace),
+              child: Row(
+                children: [
+                  Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.yellow[700],
+                        ),
                       ),
-                    ),
-                    Icon(
-                      CupertinoIcons.person_fill,
-                      color: Theme.of(context).colorScheme.outline,
-                    ),
-                  ],
-                ),
-              ],
+                      Icon(
+                        CupertinoIcons.person_fill,
+                        color: Theme.of(context).colorScheme.outline,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,11 +66,14 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
             actions: [
-              IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  CupertinoIcons.settings,
-                  size: 35,
+              Padding(
+                padding: const EdgeInsets.only(right: MSizes.defaultSpace),
+                child: IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    CupertinoIcons.settings,
+                    size: 35,
+                  ),
                 ),
               ),
             ],
@@ -79,7 +85,7 @@ class HomeScreen extends StatelessWidget {
       // floating action button in navbar center
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: MFloatingActionButton(),
-      body: SafeArea(child: MainScreen()),
+      body: MainScreen(),
     );
   }
 }
