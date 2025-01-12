@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:money_tracker_app/main_screen.dart';
+import 'package:money_tracker_app/screens/main/views/main_screen.dart';
 import 'package:money_tracker_app/utils/theme.dart';
 
 class MyAppView extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:money_tracker_app/screens/home/views/home_screen.dart';
-import 'package:money_tracker_app/screens/home/widgets/bottom_navbar.dart';
-import 'package:money_tracker_app/screens/home/widgets/floating_button.dart';
+import 'package:money_tracker_app/screens/main/widgets/bottom_navbar.dart';
+import 'package:money_tracker_app/screens/main/widgets/floating_button.dart';
 import 'package:money_tracker_app/screens/stats/views/stats_screen.dart';
 
 class MainScreen extends StatefulWidget {
