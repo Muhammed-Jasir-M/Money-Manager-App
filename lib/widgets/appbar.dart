@@ -28,13 +28,14 @@ class MAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       elevation: 0,
       automaticallyImplyLeading: false,
-      leadingWidth: 36.0,
+      leadingWidth: 40.0,
       leading: showBackArrow
           ? IconButton(
               onPressed: () => Navigator.of(context).pop(),
               icon: Icon(
-                Icons.arrow_left,
-                color: isDark ? MColors.black : MColors.white,
+                Icons.arrow_circle_left_outlined,
+                color: isDark ? MColors.white : MColors.black,
+                size: 30,
               ),
             )
           : leadingIcon != null

@@ -36,7 +36,7 @@ class StatsScreen extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(12,20,12,12),
                 child: MBarChart(),
               ),
-            )
+            ),
           ],
         ),
       ),

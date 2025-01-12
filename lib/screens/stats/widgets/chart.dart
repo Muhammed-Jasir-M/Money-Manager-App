@@ -47,7 +47,6 @@ class MBarChart extends StatelessWidget {
             ),
           ),
           leftTitles: AxisTitles(
-            axisNameWidget: Text('\u{20B9}'),
             sideTitles: SideTitles(
               showTitles: true,
               reservedSize: 38,
