@@ -12,7 +12,6 @@ class MGradientBalanceCard extends StatelessWidget {
 
     return Container(
       alignment: Alignment.center,
-      margin: EdgeInsets.symmetric(horizontal: 10),
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       width: MHelperFunctions.screenWidth(context),
       height: MHelperFunctions.screenWidth(context) / 2,
@@ -54,7 +53,7 @@ class MGradientBalanceCard extends StatelessWidget {
               children: [
                 MPriceInfoTextWithIcon(
                   title: 'Income',
-                  amount: '\u{20B9} 4250.00',
+                  amount: '\u{20B9} 4250.00'
                 ),
                 MPriceInfoTextWithIcon(
                   title: 'Expenses',

@@ -14,10 +14,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: MSizes.defaultSpace,
-          vertical: MSizes.defaultSpace,
-        ),
+        padding: EdgeInsets.all(MSizes.defaultSpace),
         child: Column(
           children: [
             // appbar

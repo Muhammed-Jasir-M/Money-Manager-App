@@ -35,4 +35,13 @@ class MColors {
     ],
     transform: GradientRotation(pi / 4),
   );
+
+  static const Gradient barChartGradient = LinearGradient(
+    colors: [
+      MColors.primary,
+      MColors.secondary,
+      MColors.tertiary,
+    ],
+    transform: GradientRotation(pi / 40),
+  );
 }
