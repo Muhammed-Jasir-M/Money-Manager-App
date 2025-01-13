@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:money_tracker_app/screens/add_transaction/widget/category_text_field.dart';
 import 'package:money_tracker_app/utils/constants/colors.dart';
 import 'package:money_tracker_app/utils/constants/sizes.dart';
 import 'package:money_tracker_app/widgets/appbar.dart';
+import 'package:money_tracker_app/widgets/text_form_field.dart';
 
 class AddTransactionScreen extends StatefulWidget {
   const AddTransactionScreen({super.key});
@@ -49,48 +51,19 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
           children: [
             Column(
               children: [
-                TextFormField(
-                  controller: categoryController,
-                  textAlignVertical: TextAlignVertical.center,
-                  decoration: InputDecoration(
-                    hintText: 'Category',
-                    prefixIcon: Icon(
-                      FontAwesomeIcons.list,
-                      size: 16,
-                      color: Colors.grey,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: BorderSide.none,
-                    ),
-                    filled: true,
-                    fillColor: Colors.white38,
-                  ),
-                ),
+                MCategoryTextField(),
                 const SizedBox(height: MSizes.spaceBtwInputFields),
-                TextFormField(
+                MTextFormField(
                   controller: amountController,
-                  textAlignVertical: TextAlignVertical.center,
+                  hintText: 'Amount',
+                  prefixIcon: FontAwesomeIcons.indianRupeeSign,
                   keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    hintText: 'Amount',
-                    prefixIcon: Icon(
-                      FontAwesomeIcons.indianRupeeSign,
-                      size: 16,
-                      color: Colors.grey,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: BorderSide.none,
-                    ),
-                    filled: true,
-                    fillColor: Colors.white38,
-                  ),
                 ),
                 const SizedBox(height: MSizes.spaceBtwInputFields),
-                TextFormField(
+                MTextFormField(
                   controller: dateController,
-                  textAlignVertical: TextAlignVertical.center,
+                  hintText: 'Date',
+                  prefixIcon: FontAwesomeIcons.calendar,
                   readOnly: true,
                   onTap: () async {
                     DateTime? newDate = await showDatePicker(
@@ -107,25 +80,12 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                       });
                     }
                   },
-                  decoration: InputDecoration(
-                    hintText: 'Date',
-                    prefixIcon: Icon(
-                      FontAwesomeIcons.clock,
-                      size: 16,
-                      color: Colors.grey,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: BorderSide.none,
-                    ),
-                    filled: true,
-                    fillColor: Colors.white38,
-                  ),
                 ),
                 const SizedBox(height: MSizes.spaceBtwInputFields),
-                TextFormField(
+                MTextFormField(
                   controller: timeController,
-                  textAlignVertical: TextAlignVertical.center,
+                  hintText: 'Time',
+                  prefixIcon: FontAwesomeIcons.clock,
                   readOnly: true,
                   onTap: () async {
                     TimeOfDay? newTime = await showTimePicker(
@@ -139,20 +99,6 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                       });
                     }
                   },
-                  decoration: InputDecoration(
-                    hintText: 'Time',
-                    prefixIcon: Icon(
-                      FontAwesomeIcons.clock,
-                      size: 16,
-                      color: Colors.grey,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: BorderSide.none,
-                    ),
-                    filled: true,
-                    fillColor: Colors.white38,
-                  ),
                 ),
               ],
             ),
