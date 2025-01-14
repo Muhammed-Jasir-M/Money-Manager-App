@@ -203,7 +203,6 @@ class _MCategoryAlertDialogState extends State<MCategoryAlertDialog> {
                 );
               },
             ),
-
             const SizedBox(height: MSizes.spaceBtwSections),
 
             /// Save Button

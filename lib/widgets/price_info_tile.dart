@@ -43,6 +43,7 @@ class MPriceInfoTextWithIcon extends StatelessWidget {
                 fontWeight: FontWeight.w400,
               ),
             ),
+
             Text(
               amount,
               style: TextStyle(

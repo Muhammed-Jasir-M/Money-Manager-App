@@ -131,8 +131,8 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                   }
                 },
               ),
-                  
               const SizedBox(height: MSizes.spaceBtwItems),
+              
               /// Save Button
               SizedBox(
                 width: double.infinity,
