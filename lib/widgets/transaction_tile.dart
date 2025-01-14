@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:money_tracker_app/utils/constants/colors.dart';
+import 'package:money_tracker_app/utils/helper_functions.dart';
 
 class MTransactionTile extends StatelessWidget {
   const MTransactionTile({
@@ -18,11 +19,13 @@ class MTransactionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = MHelperFunctions.isDarkMode(context);
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 16.0),
       child: Container(
         decoration: BoxDecoration(
-          color: MColors.white,
+          color: isDark ? MColors.dark : MColors.light,
           borderRadius: BorderRadius.circular(14),
         ),
         child: Padding(
@@ -51,7 +54,7 @@ class MTransactionTile extends StatelessWidget {
                     title,
                     style: TextStyle(
                       fontSize: 14,
-                      color: MColors.black,
+                      color: Theme.of(context).colorScheme.onSurface,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -64,7 +67,7 @@ class MTransactionTile extends StatelessWidget {
                     amount,
                     style: TextStyle(
                       fontSize: 14,
-                      color: MColors.black,
+                      color: Theme.of(context).colorScheme.onSurface,
                       fontWeight: FontWeight.w600,
                     ),
                   ),

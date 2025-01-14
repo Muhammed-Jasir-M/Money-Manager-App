@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:money_tracker_app/screens/stats/widgets/chart.dart';
+import 'package:money_tracker_app/utils/constants/colors.dart';
 import 'package:money_tracker_app/utils/constants/sizes.dart';
 import 'package:money_tracker_app/utils/helper_functions.dart';
 import 'package:money_tracker_app/widgets/appbar.dart';
@@ -9,6 +10,8 @@ class StatsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = MHelperFunctions.isDarkMode(context);
+    
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.all(MSizes.defaultSpace),
@@ -30,10 +33,10 @@ class StatsScreen extends StatelessWidget {
               height: MHelperFunctions.screenWidth(context),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
-                color: Colors.white,
+                color: isDark ? MColors.dark : MColors.light,
               ),
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(12,20,12,12),
+                padding: const EdgeInsets.fromLTRB(12, 20, 12, 12),
                 child: MBarChart(),
               ),
             ),

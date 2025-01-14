@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:money_tracker_app/utils/constants/colors.dart';
+import 'package:money_tracker_app/utils/helper_functions.dart';
 
 class MTextFormField extends StatelessWidget {
   const MTextFormField({
@@ -12,19 +14,24 @@ class MTextFormField extends StatelessWidget {
     this.onTap,
     this.onIconPressed,
     this.isOpened = false,
+    this.fillColor,
+    this.isDense = false,
   });
 
   final TextEditingController? controller;
   final String hintText;
   final IconData prefixIcon;
   final IconData? suffixIcon;
+  final Color? fillColor;
   final TextInputType? keyboardType;
-  final bool readOnly, isOpened;
+  final bool readOnly, isOpened, isDense;
   final VoidCallback? onTap;
   final VoidCallback? onIconPressed;
 
   @override
   Widget build(BuildContext context) {
+    final isDark = MHelperFunctions.isDarkMode(context);
+    
     return TextFormField(
       onTap: onTap,
       readOnly: readOnly,
@@ -33,7 +40,7 @@ class MTextFormField extends StatelessWidget {
       textAlignVertical: TextAlignVertical.center,
       decoration: InputDecoration(
         hintText: hintText,
-        isDense: true,
+        isDense: isDense,
         prefixIcon: Icon(prefixIcon, size: 16, color: Colors.grey),
         suffixIcon: IconButton(
           onPressed: onIconPressed,
@@ -46,7 +53,7 @@ class MTextFormField extends StatelessWidget {
           borderSide: BorderSide.none,
         ),
         filled: true,
-        fillColor: Colors.white38,
+        fillColor: fillColor ?? (isDark ? MColors.dark : MColors.light),
       ),
     );
   }

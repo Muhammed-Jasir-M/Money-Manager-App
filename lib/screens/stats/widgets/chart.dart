@@ -74,17 +74,20 @@ class MBarChart extends StatelessWidget {
       case 0:
         text = '1k';
         break;
-      case 2:
+      case 1:
         text = '2k';
         break;
-      case 3:
+      case 2:
         text = '3k';
         break;
-      case 4:
+      case 3:
         text = '4k';
         break;
-      case 5:
+      case 4:
         text = '5k';
+        break;
+      case 5:
+        text = '6k';
         break;
       default:
         return Container();

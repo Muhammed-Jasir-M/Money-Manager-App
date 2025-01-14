@@ -78,7 +78,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                 },
               ),
               const SizedBox(height: MSizes.spaceBtwInputFields),
-
+                  
               /// Amount TextField
               MTextFormField(
                 controller: amountController,
@@ -87,7 +87,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                 keyboardType: TextInputType.number,
               ),
               const SizedBox(height: MSizes.spaceBtwInputFields),
-
+                  
               /// Date TextField
               MTextFormField(
                 controller: dateController,
@@ -101,7 +101,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                     firstDate: DateTime.now(),
                     lastDate: DateTime.now().add(Duration(days: 365)),
                   );
-
+                  
                   if (newDate != null) {
                     setState(() {
                       dateController.text =
@@ -111,7 +111,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                 },
               ),
               const SizedBox(height: MSizes.spaceBtwInputFields),
-
+                  
               /// Time TextField
               MTextFormField(
                 controller: timeController,
@@ -123,7 +123,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                     context: context,
                     initialTime: TimeOfDay.now(),
                   );
-
+                  
                   if (newTime != null) {
                     setState(() {
                       timeController.text = newTime.format(context);
@@ -131,11 +131,12 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                   }
                 },
               ),
-
+                  
+              const SizedBox(height: MSizes.spaceBtwItems),
               /// Save Button
               SizedBox(
                 width: double.infinity,
-                height: kToolbarHeight,
+                height: 50,
                 child: Container(
                   decoration: BoxDecoration(
                     gradient: MColors.floatingButtonGradient,

@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:money_tracker_app/utils/constants/colors.dart';
 import 'package:money_tracker_app/utils/constants/sizes.dart';
 import 'package:money_tracker_app/utils/helper_functions.dart';
 import 'package:money_tracker_app/widgets/text_form_field.dart';
@@ -16,7 +18,8 @@ class MCategoryAlertDialog extends StatefulWidget {
 
 class _MCategoryAlertDialogState extends State<MCategoryAlertDialog> {
   bool isExpanded = false;
-  IconData isIconSelected = FontAwesomeIcons.utensils;
+  IconData iconSelected = FontAwesomeIcons.utensils;
+  Color selectedColor = Colors.yellow;
 
   final List<IconData> categoryIcons = [
     FontAwesomeIcons.utensils,
@@ -55,6 +58,8 @@ class _MCategoryAlertDialogState extends State<MCategoryAlertDialog> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = MHelperFunctions.isDarkMode(context);
+
     return AlertDialog(
       title: Center(
         child: Text(
@@ -98,7 +103,7 @@ class _MCategoryAlertDialogState extends State<MCategoryAlertDialog> {
                     width: MHelperFunctions.screenWidth(context),
                     height: MHelperFunctions.screenWidth(context) / 2,
                     decoration: BoxDecoration(
-                      color: Colors.white38,
+                      color: isDark ? MColors.dark : MColors.light,
                       borderRadius: BorderRadius.vertical(
                         bottom: Radius.circular(15),
                       ),
@@ -116,21 +121,21 @@ class _MCategoryAlertDialogState extends State<MCategoryAlertDialog> {
                           return GestureDetector(
                             onTap: () {
                               setState(() {
-                                isIconSelected = categoryIcons[index];
-                                Timer(Duration(seconds: 2), () => setState(() => isExpanded = false));
+                                iconSelected = categoryIcons[index];
+                                Timer(Duration(seconds: 1),
+                                    () => setState(() => isExpanded = false));
                               });
                             },
                             child: Container(
                               padding: EdgeInsets.all(4),
                               decoration: BoxDecoration(
-                                border: Border.all(
-                                  width: 3,
-                                  color: isIconSelected == categoryIcons[index]
-                                      ? Colors.green
-                                      : Colors.grey,
-                                ),
-                                borderRadius: BorderRadius.circular(15)
-                              ),
+                                  border: Border.all(
+                                    width: 3,
+                                    color: iconSelected == categoryIcons[index]
+                                        ? Colors.green
+                                        : Colors.grey,
+                                  ),
+                                  borderRadius: BorderRadius.circular(15)),
                               child: Center(
                                 child: FaIcon(
                                   categoryIcons[index],
@@ -149,8 +154,74 @@ class _MCategoryAlertDialogState extends State<MCategoryAlertDialog> {
             /// Color TextField
             MTextFormField(
               hintText: 'Color',
+              readOnly: true,
               prefixIcon: Icons.color_lens_rounded,
               keyboardType: TextInputType.number,
+              fillColor: selectedColor,
+              onTap: () async {
+                return showDialog(
+                  context: context,
+                  builder: (ctx) {
+                    return AlertDialog(
+                      title: Center(child: const Text('Pick a color')),
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          ColorPicker(
+                            pickerColor: selectedColor,
+                            onColorChanged: (value) {
+                              setState(() => selectedColor = value);
+                            },
+                          ),
+
+                          /// Save Button
+                          SizedBox(
+                            width: double.infinity,
+                            height: 50,
+                            child: GestureDetector(
+                              onTap: () => Navigator.pop(ctx),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  gradient: MColors.floatingButtonGradient,
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'Save',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+
+            const SizedBox(height: MSizes.spaceBtwSections),
+
+            /// Save Button
+            SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: MColors.floatingButtonGradient,
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Center(
+                  child: Text(
+                    'Save',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
