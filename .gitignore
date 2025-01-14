@@ -43,3 +43,11 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# generated files
+**/generated_plugin_registrant.*
+**/generated_plugins.*
+**/GeneratedPluginRegistrant.*
+
+# Firebase config files
+android/app/google-services.json
