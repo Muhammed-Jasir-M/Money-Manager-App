@@ -4,8 +4,11 @@ import 'package:money_tracker_app/utils/constants/colors.dart';
 import 'package:money_tracker_app/utils/helper_functions.dart';
 
 class MBottomNavbar extends StatelessWidget {
-  const MBottomNavbar(
-      {super.key, required this.currentIndex, required this.onIndexChange});
+  const MBottomNavbar({
+    super.key,
+    required this.currentIndex,
+    required this.onIndexChange,
+  });
 
   final int currentIndex;
   final void Function(int) onIndexChange;

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:money_tracker_app/data/data.dart';
+import 'package:money_tracker_app/screens/all_transaction/views/all_transaction_screen.dart';
 import 'package:money_tracker_app/screens/home/widgets/gradient_card.dart';
 import 'package:money_tracker_app/screens/home/widgets/home_appbar.dart';
 import 'package:money_tracker_app/utils/constants/sizes.dart';
@@ -26,7 +27,18 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 20),
 
             // Section Heading
-            MSectionHeading(title: 'Transactions', showActionbutton: true),
+            MSectionHeading(
+              title: 'Transactions',
+              showActionbutton: true,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AllTransactionScreen()
+                  ),
+                );
+              },
+            ),
             const SizedBox(height: 20),
 
             // Transaction Tile
