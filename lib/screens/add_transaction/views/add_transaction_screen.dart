@@ -3,9 +3,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:money_tracker_app/screens/add_transaction/widget/category_alert_dialog.dart';
 import 'package:money_tracker_app/utils/constants/colors.dart';
+import 'package:money_tracker_app/utils/constants/enums.dart';
 import 'package:money_tracker_app/utils/constants/sizes.dart';
 import 'package:money_tracker_app/utils/helper_functions.dart';
 import 'package:money_tracker_app/widgets/appbar.dart';
+import 'package:money_tracker_app/widgets/radio_button.dart';
 import 'package:money_tracker_app/widgets/text_form_field.dart';
 
 class AddTransactionScreen extends StatefulWidget {
@@ -20,6 +22,8 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
   final amountController = TextEditingController();
   final dateController = TextEditingController();
   final timeController = TextEditingController();
+
+  CategoryType? _categoryType;
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +56,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
         child: SizedBox(
           width: MHelperFunctions.screenWidth(context),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               /// Category TextField
               MTextFormField(
@@ -78,7 +83,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                 },
               ),
               const SizedBox(height: MSizes.spaceBtwInputFields),
-                  
+
               /// Amount TextField
               MTextFormField(
                 controller: amountController,
@@ -87,7 +92,38 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                 keyboardType: TextInputType.number,
               ),
               const SizedBox(height: MSizes.spaceBtwInputFields),
-                  
+
+              /// Category Type
+              Text(
+                'Category Type',
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+
+              const SizedBox(height: MSizes.sm),
+
+              Row(
+                children: [
+                  MRadioButton(
+                    title: CategoryType.income.name,
+                    value: CategoryType.income,
+                    categoryType: _categoryType,
+                    onChanged: (value) => setState(() => _categoryType = value),
+                  ),
+                  SizedBox(width: MSizes.sm),
+                  MRadioButton(
+                    title: CategoryType.expense.name,
+                    value: CategoryType.expense,
+                    categoryType: _categoryType,
+                    onChanged: (value) => setState(() => _categoryType = value),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: MSizes.spaceBtwItems),
+
               /// Date TextField
               MTextFormField(
                 controller: dateController,
@@ -101,7 +137,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                     firstDate: DateTime.now(),
                     lastDate: DateTime.now().add(Duration(days: 365)),
                   );
-                  
+
                   if (newDate != null) {
                     setState(() {
                       dateController.text =
@@ -111,7 +147,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                 },
               ),
               const SizedBox(height: MSizes.spaceBtwInputFields),
-                  
+
               /// Time TextField
               MTextFormField(
                 controller: timeController,
@@ -123,7 +159,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                     context: context,
                     initialTime: TimeOfDay.now(),
                   );
-                  
+
                   if (newTime != null) {
                     setState(() {
                       timeController.text = newTime.format(context);
@@ -132,7 +168,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                 },
               ),
               const SizedBox(height: MSizes.spaceBtwItems),
-              
+
               /// Save Button
               SizedBox(
                 width: double.infinity,
