@@ -1,46 +1,93 @@
 import 'package:flutter/material.dart';
-import 'package:money_tracker_app/screens/stats/widgets/chart.dart';
+import 'package:money_tracker_app/screens/expense/views/expanse_screen.dart';
+import 'package:money_tracker_app/screens/income/views/income_screen.dart';
 import 'package:money_tracker_app/utils/constants/colors.dart';
 import 'package:money_tracker_app/utils/constants/sizes.dart';
 import 'package:money_tracker_app/utils/helper_functions.dart';
-import 'package:money_tracker_app/widgets/appbar.dart';
 
-class StatsScreen extends StatelessWidget {
+class StatsScreen extends StatefulWidget {
   const StatsScreen({super.key});
+
+  @override
+  State<StatsScreen> createState() => _StatsScreenState();
+}
+
+class _StatsScreenState extends State<StatsScreen>
+    with SingleTickerProviderStateMixin {
+  late TabController tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final isDark = MHelperFunctions.isDarkMode(context);
-    
+
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.all(MSizes.defaultSpace),
-        child: Column(
-          children: [
-            MAppBar(
-              title: Text(
-                'Transactions',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.onSurface,
+        child: SizedBox(
+          height: MHelperFunctions.screenHeight(context),
+          child: Column(
+            children: [
+              const SizedBox(height: 5),
+              Container(
+                width: MHelperFunctions.screenWidth(context),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: isDark ? MColors.dark : MColors.light,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Column(
+                    children: [
+                      TabBar(
+                        controller: tabController,
+                        indicatorColor:
+                            isDark ? MColors.primary : MColors.secondary,
+                        labelColor: isDark ? MColors.secondary : MColors.primary,
+                        unselectedLabelColor:
+                            isDark ? MColors.secondary : MColors.primary,
+                        dividerHeight: 0,
+                        indicatorWeight: 2,
+                        indicator: BoxDecoration(
+                          color: isDark
+                              ? MColors.bgDark.withValues(alpha: 1.0)
+                              : MColors.bgLight.withValues(alpha: 1.0),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        indicatorSize: TabBarIndicatorSize.tab,
+                        indicatorPadding: EdgeInsets.all(5),
+                        tabs: [
+                          Tab(text: 'Income'),
+                          Tab(text: 'Expense'),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(height: 20),
-            Container(
-              width: MHelperFunctions.screenWidth(context),
-              height: MHelperFunctions.screenWidth(context),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: isDark ? MColors.dark : MColors.light,
+              const SizedBox(height: 10),
+              Expanded(
+                child: TabBarView(
+                  controller: tabController,
+                  children: [
+                    IncomeScreen(),
+                    ExpanseScreen(),
+                  ],
+                ),
               ),
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(12, 20, 12, 12),
-                child: MBarChart(),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
