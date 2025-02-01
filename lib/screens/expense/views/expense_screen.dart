@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:money_tracker_app/data/data.dart';
 
+import '../../../data/data.dart';
 import '../../../utils/constants/colors.dart';
 import '../../../utils/helper_functions.dart';
 import '../../../widgets/transaction_tile.dart';
-import '../widgets/chart.dart';
+import '../../expense/widgets/chart.dart';
 
-class IncomeScreen extends StatelessWidget {
-  const IncomeScreen({super.key});
+class ExpenseScreen extends StatelessWidget {
+  const ExpenseScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,21 +32,21 @@ class IncomeScreen extends StatelessWidget {
         
             const SizedBox(height: 20),
         
-                // Transaction Tile
-                ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: transactionsData.length,
-                  itemBuilder: (context, index) {
-                    return MTransactionTile(
-                      icon: transactionsData[index]['icon'],
-                      title: transactionsData[index]['title'],
-                      color: transactionsData[index]['color'],
-                      amount: transactionsData[index]['amount'],
-                      date: transactionsData[index]['date'],
-                    );
-                  },
-                ),
+            // Transaction Tile
+            ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: transactionsData.length,
+              itemBuilder: (context, index) {
+                return MTransactionTile(
+                  icon: transactionsData[index]['icon'],
+                  title: transactionsData[index]['title'],
+                  color: transactionsData[index]['color'],
+                  amount: transactionsData[index]['amount'],
+                  date: transactionsData[index]['date'],
+                );
+              },
+            ),
           ],
         ),
       ),

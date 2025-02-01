@@ -11,10 +11,9 @@ class MGradientBalanceCard extends StatelessWidget {
     final isDark = MHelperFunctions.isDarkMode(context);
 
     return Container(
-      alignment: Alignment.center,
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       width: MHelperFunctions.screenWidth(context),
-      height: MHelperFunctions.screenWidth(context) / 2,
+      height: 180,
       decoration: BoxDecoration(
         gradient: MColors.boxGradient,
         borderRadius: BorderRadius.circular(25),
@@ -27,6 +26,8 @@ class MGradientBalanceCard extends StatelessWidget {
         ],
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             'Total Balance',
@@ -47,7 +48,7 @@ class MGradientBalanceCard extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

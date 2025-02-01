@@ -9,6 +9,8 @@ import 'package:money_tracker_app/utils/constants/sizes.dart';
 import 'package:money_tracker_app/utils/helper_functions.dart';
 import 'package:money_tracker_app/widgets/text_form_field.dart';
 
+import '../../../data/data.dart';
+
 class MCategoryAlertDialog extends StatefulWidget {
   const MCategoryAlertDialog({super.key});
 
@@ -20,41 +22,6 @@ class _MCategoryAlertDialogState extends State<MCategoryAlertDialog> {
   bool isExpanded = false;
   IconData iconSelected = FontAwesomeIcons.utensils;
   Color selectedColor = Colors.yellow;
-
-  final List<IconData> categoryIcons = [
-    FontAwesomeIcons.utensils,
-    FontAwesomeIcons.bagShopping,
-    FontAwesomeIcons.cartShopping,
-    FontAwesomeIcons.film,
-    FontAwesomeIcons.plane,
-    FontAwesomeIcons.bus,
-    FontAwesomeIcons.heartPulse,
-    FontAwesomeIcons.house,
-    FontAwesomeIcons.lightbulb,
-    FontAwesomeIcons.book,
-    FontAwesomeIcons.shieldHalved,
-    FontAwesomeIcons.paw,
-    FontAwesomeIcons.shower,
-    FontAwesomeIcons.receipt,
-    FontAwesomeIcons.gift,
-    FontAwesomeIcons.coins,
-    FontAwesomeIcons.wallet,
-    FontAwesomeIcons.chartLine,
-    FontAwesomeIcons.briefcase,
-    FontAwesomeIcons.building,
-    FontAwesomeIcons.laptopCode,
-    FontAwesomeIcons.arrowRotateLeft,
-    FontAwesomeIcons.piggyBank,
-    FontAwesomeIcons.circlePlus,
-    FontAwesomeIcons.kitMedical,
-    FontAwesomeIcons.chartPie,
-    FontAwesomeIcons.creditCard,
-    FontAwesomeIcons.fileInvoiceDollar,
-    FontAwesomeIcons.fileSignature,
-    FontAwesomeIcons.chartBar,
-    FontAwesomeIcons.bitcoin,
-    FontAwesomeIcons.city,
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -156,7 +123,6 @@ class _MCategoryAlertDialogState extends State<MCategoryAlertDialog> {
               hintText: 'Color',
               readOnly: true,
               prefixIcon: Icons.color_lens_rounded,
-              keyboardType: TextInputType.number,
               fillColor: selectedColor,
               onTap: () async {
                 return showDialog(

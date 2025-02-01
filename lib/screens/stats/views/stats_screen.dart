@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:money_tracker_app/screens/expense/views/expanse_screen.dart';
+import 'package:money_tracker_app/screens/expense/views/expense_screen.dart';
 import 'package:money_tracker_app/screens/income/views/income_screen.dart';
 import 'package:money_tracker_app/utils/constants/colors.dart';
 import 'package:money_tracker_app/utils/constants/sizes.dart';
@@ -82,7 +82,7 @@ class _StatsScreenState extends State<StatsScreen>
                   controller: tabController,
                   children: [
                     IncomeScreen(),
-                    ExpanseScreen(),
+                    ExpenseScreen(),
                   ],
                 ),
               ),
