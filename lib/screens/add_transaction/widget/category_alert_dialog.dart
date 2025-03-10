@@ -23,6 +23,10 @@ class _MCategoryAlertDialogState extends State<MCategoryAlertDialog> {
   IconData iconSelected = FontAwesomeIcons.utensils;
   Color selectedColor = Colors.yellow;
 
+  final titleController = TextEditingController();
+  final iconController = TextEditingController();
+  final colorController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final isDark = MHelperFunctions.isDarkMode(context);
@@ -45,6 +49,7 @@ class _MCategoryAlertDialogState extends State<MCategoryAlertDialog> {
           children: [
             /// Title TextField
             MTextFormField(
+              controller: titleController,
               hintText: 'Title',
               prefixIcon: Icons.category_rounded,
             ),
@@ -53,6 +58,7 @@ class _MCategoryAlertDialogState extends State<MCategoryAlertDialog> {
             /// Icon TextField
             MTextFormField(
               hintText: 'Icon',
+              controller: iconController,
               readOnly: true,
               onIconPressed: () => setState(() => isExpanded = !isExpanded),
               onTap: () => setState(() => isExpanded = !isExpanded),
@@ -121,6 +127,7 @@ class _MCategoryAlertDialogState extends State<MCategoryAlertDialog> {
             /// Color TextField
             MTextFormField(
               hintText: 'Color',
+              controller: colorController,
               readOnly: true,
               prefixIcon: Icons.color_lens_rounded,
               fillColor: selectedColor,
@@ -175,15 +182,20 @@ class _MCategoryAlertDialogState extends State<MCategoryAlertDialog> {
             SizedBox(
               width: double.infinity,
               height: 50,
-              child: Container(
-                decoration: BoxDecoration(
-                  gradient: MColors.floatingButtonGradient,
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Center(
-                  child: Text(
-                    'Save',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: MColors.floatingButtonGradient,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Center(
+                    child: Text(
+                      'Save',
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    ),
                   ),
                 ),
               ),
