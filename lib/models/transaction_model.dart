@@ -1,11 +1,34 @@
-import 'package:money_tracker_app/utils/constants/enums.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
+part 'transaction_model.g.dart';
+
+@HiveType(typeId: 2)
+enum CategoryType {
+  @HiveField(0)
+  expense,
+
+  @HiveField(1)
+  income
+}
+
+@HiveType(typeId: 1)
 class TransactionModel {
+  @HiveField(0)
   String tId;
+
+  @HiveField(1)
   String categoryId;
+
+  @HiveField(2)
   CategoryType type;
+
+  @HiveField(3)
   int amount;
+
+  @HiveField(4)
   DateTime date;
+
+  @HiveField(5)
   DateTime time;
 
   TransactionModel({
@@ -16,13 +39,4 @@ class TransactionModel {
     required this.type,
     required this.time,
   });
-
-  static TransactionModel empty() => TransactionModel(
-        tId: '',
-        categoryId: '',
-        amount: 0,
-        date: DateTime.now(),
-        time: DateTime.now(),
-        type: CategoryType.expense,
-      );
 }
