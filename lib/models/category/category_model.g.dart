@@ -17,7 +17,7 @@ class CategoryModelAdapter extends TypeAdapter<CategoryModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return CategoryModel(
-      categoryId: fields[0] as String,
+      cId: fields[0] as String,
       title: fields[1] as String,
       iconIndex: fields[2] as int,
       color: fields[3] as int,
@@ -29,7 +29,7 @@ class CategoryModelAdapter extends TypeAdapter<CategoryModel> {
     writer
       ..writeByte(4)
       ..writeByte(0)
-      ..write(obj.categoryId)
+      ..write(obj.cId)
       ..writeByte(1)
       ..write(obj.title)
       ..writeByte(2)

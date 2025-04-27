@@ -206,18 +206,16 @@ class _MCategoryAlertDialogState extends State<MCategoryAlertDialog> {
                     });
                   }
 
-                  context.read<CategoryBloc>().add(
-                        AddCategory(
-                          CategoryModel(
-                            title: titleController.text,
-                            iconIndex: iconSelected,
-                            color: selectedColor.value,
-                            categoryId: DateTime.now()
-                                .millisecondsSinceEpoch
-                                .toString(),
-                          ),
-                        ),
-                      );
+                  BlocProvider.of<CategoryBloc>(context).add(
+                    AddCategory(
+                      CategoryModel(
+                        title: titleController.text,
+                        iconIndex: iconSelected,
+                        color: selectedColor.value,
+                        cId: DateTime.now().millisecondsSinceEpoch.toString(),
+                      ),
+                    ),
+                  );
                 },
                 child: Container(
                   decoration: BoxDecoration(

@@ -17,6 +17,7 @@ class MTextFormField extends StatelessWidget {
     this.fillColor,
     this.isDense = false,
     this.suffixWidget,
+    this.onChanged,
   });
 
   final TextEditingController? controller;
@@ -28,6 +29,7 @@ class MTextFormField extends StatelessWidget {
   final bool readOnly, isOpened, isDense;
   final VoidCallback? onTap;
   final VoidCallback? onIconPressed;
+  final ValueChanged<String>? onChanged;
   final Widget? suffixWidget;
 
   @override
@@ -40,6 +42,7 @@ class MTextFormField extends StatelessWidget {
       controller: controller,
       keyboardType: keyboardType,
       textAlignVertical: TextAlignVertical.center,
+      onChanged: onChanged,
       decoration: InputDecoration(
         hintText: hintText,
         isDense: isDense,

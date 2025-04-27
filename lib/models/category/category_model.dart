@@ -5,7 +5,7 @@ part 'category_model.g.dart';
 @HiveType(typeId: 0)
 class CategoryModel extends HiveObject {
   @HiveField(0)
-  String categoryId;
+  String cId;
 
   @HiveField(1)
   String title;
@@ -17,9 +17,18 @@ class CategoryModel extends HiveObject {
   int color;
 
   CategoryModel({
-    required this.categoryId,
+    required this.cId,
     required this.title,
     required this.iconIndex,
     required this.color,
   });
+
+  static CategoryModel empty() {
+    return CategoryModel(
+      cId: '',
+      title: '',
+      iconIndex: 0,
+      color: 0,
+    );
+  }
 }

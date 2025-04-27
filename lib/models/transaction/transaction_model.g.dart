@@ -18,11 +18,11 @@ class TransactionModelAdapter extends TypeAdapter<TransactionModel> {
     };
     return TransactionModel(
       tId: fields[0] as String,
-      categoryId: fields[1] as String,
-      amount: fields[3] as int,
-      date: fields[4] as DateTime,
-      type: fields[2] as CategoryType,
-      time: fields[5] as DateTime,
+      category: fields[1] as CategoryModel,
+      amount: fields[3] as double,
+      date: fields[4] as String,
+      type: fields[2] as TransactionType,
+      time: fields[5] as String,
     );
   }
 
@@ -33,7 +33,7 @@ class TransactionModelAdapter extends TypeAdapter<TransactionModel> {
       ..writeByte(0)
       ..write(obj.tId)
       ..writeByte(1)
-      ..write(obj.categoryId)
+      ..write(obj.category)
       ..writeByte(2)
       ..write(obj.type)
       ..writeByte(3)
@@ -51,45 +51,6 @@ class TransactionModelAdapter extends TypeAdapter<TransactionModel> {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is TransactionModelAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
-}
-
-class CategoryTypeAdapter extends TypeAdapter<CategoryType> {
-  @override
-  final int typeId = 2;
-
-  @override
-  CategoryType read(BinaryReader reader) {
-    switch (reader.readByte()) {
-      case 0:
-        return CategoryType.expense;
-      case 1:
-        return CategoryType.income;
-      default:
-        return CategoryType.expense;
-    }
-  }
-
-  @override
-  void write(BinaryWriter writer, CategoryType obj) {
-    switch (obj) {
-      case CategoryType.expense:
-        writer.writeByte(0);
-        break;
-      case CategoryType.income:
-        writer.writeByte(1);
-        break;
-    }
-  }
-
-  @override
-  int get hashCode => typeId.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is CategoryTypeAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

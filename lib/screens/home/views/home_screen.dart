@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:money_tracker_app/data/data.dart';
 import 'package:money_tracker_app/screens/all_transaction/views/all_transaction_screen.dart';
@@ -34,8 +33,7 @@ class HomeScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => AllTransactionScreen()
-                  ),
+                      builder: (context) => AllTransactionScreen()),
                 );
               },
             ),
