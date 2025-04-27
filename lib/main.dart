@@ -26,6 +26,10 @@ Future<void> main() async {
     Hive.registerAdapter(TransactionTypeAdapter());
   }
 
+  // Open the Hive box
+  await Hive.openBox<TransactionModel>('transactions');
+  await Hive.openBox<CategoryModel>('categories');
+
   Bloc.observer = SimpleBlocObserver();
 
   // Run the MyApp
