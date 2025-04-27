@@ -3,21 +3,22 @@ import 'package:money_tracker_app/utils/constants/colors.dart';
 import 'package:money_tracker_app/utils/helper_functions.dart';
 
 class MTransactionTile extends StatelessWidget {
-  const MTransactionTile({
-    super.key,
-    this.color = Colors.yellow,
-    this.iconColor = Colors.white,
-    required this.icon,
-    required this.title,
-    this.amount = '',
-    this.date = "",
-    this.showPriceDate = true,
-  });
+  const MTransactionTile(
+      {super.key,
+      this.iconBgColor = Colors.yellow,
+      this.iconColor = Colors.white,
+      required this.icon,
+      required this.title,
+      this.amount = '',
+      this.date = "",
+      this.showPriceDate = true,
+      this.bgColor});
 
-  final Color color, iconColor;
+  final Color iconBgColor, iconColor;
   final IconData icon;
   final String title, amount, date;
   final bool showPriceDate;
+  final Color? bgColor;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,9 @@ class MTransactionTile extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 16.0),
       child: Container(
         decoration: BoxDecoration(
-          color: isDark ? MColors.dark : MColors.light,
+          color: bgColor != null
+              ? bgColor
+              : (isDark ? MColors.dark : MColors.light),
           borderRadius: BorderRadius.circular(14),
         ),
         child: Padding(
@@ -44,7 +47,7 @@ class MTransactionTile extends StatelessWidget {
                         width: 50,
                         height: 50,
                         decoration: BoxDecoration(
-                          color: color,
+                          color: iconBgColor,
                           shape: BoxShape.circle,
                         ),
                       ),

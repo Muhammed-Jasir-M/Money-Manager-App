@@ -29,24 +29,24 @@ class IncomeScreen extends StatelessWidget {
                 child: MBarChart(),
               ),
             ),
-        
+
             const SizedBox(height: 20),
-        
-                // Transaction Tile
-                ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: transactionsData.length,
-                  itemBuilder: (context, index) {
-                    return MTransactionTile(
-                      icon: transactionsData[index]['icon'],
-                      title: transactionsData[index]['title'],
-                      color: transactionsData[index]['color'],
-                      amount: transactionsData[index]['amount'],
-                      date: transactionsData[index]['date'],
-                    );
-                  },
-                ),
+
+            // Transaction Tile
+            ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: transactionsData.length,
+              itemBuilder: (context, index) {
+                return MTransactionTile(
+                  icon: transactionsData[index]['icon'],
+                  title: transactionsData[index]['title'],
+                  iconBgColor: transactionsData[index]['color'],
+                  amount: transactionsData[index]['amount'],
+                  date: transactionsData[index]['date'],
+                );
+              },
+            ),
           ],
         ),
       ),

@@ -29,9 +29,9 @@ class ExpenseScreen extends StatelessWidget {
                 child: MBarChart(),
               ),
             ),
-        
+
             const SizedBox(height: 20),
-        
+
             // Transaction Tile
             ListView.builder(
               physics: NeverScrollableScrollPhysics(),
@@ -41,7 +41,7 @@ class ExpenseScreen extends StatelessWidget {
                 return MTransactionTile(
                   icon: transactionsData[index]['icon'],
                   title: transactionsData[index]['title'],
-                  color: transactionsData[index]['color'],
+                  iconBgColor: transactionsData[index]['color'],
                   amount: transactionsData[index]['amount'],
                   date: transactionsData[index]['date'],
                 );

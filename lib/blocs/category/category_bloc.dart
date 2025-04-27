@@ -14,7 +14,11 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       emit(CategoryLoading());
       try {
         final categories = categoryBox.values.toList();
-        emit(CategoryLoaded(categories));
+        if (categories.isEmpty) {
+          emit(CategoryError("No categories found"));
+        } else {
+          emit(CategoryLoaded(categories));
+        }
       } catch (e) {
         emit(CategoryError(e.toString()));
       }

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:money_tracker_app/screens/add_transaction/blocs/category/category_bloc.dart';
+import 'package:money_tracker_app/blocs/category/category_bloc.dart';
 import 'package:money_tracker_app/screens/add_transaction/views/add_transaction_screen.dart';
 import 'package:money_tracker_app/utils/constants/colors.dart';
 

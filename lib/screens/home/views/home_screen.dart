@@ -48,7 +48,7 @@ class HomeScreen extends StatelessWidget {
                 return MTransactionTile(
                   icon: transactionsData[index]['icon'],
                   title: transactionsData[index]['title'],
-                  color: transactionsData[index]['color'],
+                  iconBgColor: transactionsData[index]['color'],
                   amount: transactionsData[index]['amount'],
                   date: transactionsData[index]['date'],
                 );
