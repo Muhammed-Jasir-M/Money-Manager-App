@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:money_tracker_app/app.dart';
 import 'package:money_tracker_app/models/category/category_model.dart';
+import 'package:money_tracker_app/models/enum/enum.dart';
 import 'package:money_tracker_app/models/transaction/transaction_model.dart';
 import 'package:money_tracker_app/simple_bloc_observer.dart';
 
@@ -20,8 +21,8 @@ Future<void> main() async {
     Hive.registerAdapter(TransactionModelAdapter());
   }
 
-  if (!Hive.isAdapterRegistered(CategoryTypeAdapter().typeId)) {
-    Hive.registerAdapter(CategoryTypeAdapter());
+  if (!Hive.isAdapterRegistered(TransactionTypeAdapter().typeId)) {
+    Hive.registerAdapter(TransactionTypeAdapter());
   }
 
   Bloc.observer = SimpleBlocObserver();

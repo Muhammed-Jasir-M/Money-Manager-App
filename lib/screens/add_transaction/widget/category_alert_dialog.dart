@@ -25,7 +25,7 @@ class _MCategoryAlertDialogState extends State<MCategoryAlertDialog> {
   bool isExpanded = false;
   int iconSelected = 3;
   Color selectedColor = Colors.blue;
-  bool isLoading = false;
+  bool isCategoryLoading = false;
 
   final titleController = TextEditingController();
   final iconController = TextEditingController();
@@ -202,7 +202,7 @@ class _MCategoryAlertDialogState extends State<MCategoryAlertDialog> {
                         "Please enter a title", context);
                   } else {
                     setState(() {
-                      isLoading = true;
+                      isCategoryLoading = true;
                     });
                   }
 
@@ -223,7 +223,7 @@ class _MCategoryAlertDialogState extends State<MCategoryAlertDialog> {
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Center(
-                    child: isLoading
+                    child: isCategoryLoading
                         ? CircularProgressIndicator()
                         : Text(
                             'Save',
