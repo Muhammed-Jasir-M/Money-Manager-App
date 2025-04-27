@@ -1,10 +1,11 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:money_tracker_app/app.dart';
 import 'package:money_tracker_app/models/category/category_model.dart';
 import 'package:money_tracker_app/models/enum/enum.dart';
 import 'package:money_tracker_app/models/transaction/transaction_model.dart';
+import 'package:money_tracker_app/screens/add_transaction/blocs/transaction/transaction_bloc.dart';
 import 'package:money_tracker_app/simple_bloc_observer.dart';
 
 Future<void> main() async {
@@ -28,5 +29,10 @@ Future<void> main() async {
   Bloc.observer = SimpleBlocObserver();
 
   // Run the MyApp
-  runApp(const MyApp());
+  runApp(
+    BlocProvider(
+      create: (context) => TransactionBloc(),
+      child: const MyApp(),
+    ),
+  );
 }
