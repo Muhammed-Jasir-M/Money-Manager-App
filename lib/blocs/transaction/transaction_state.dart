@@ -10,12 +10,12 @@ class TransactionInitial extends TransactionState {}
 class TransactionLoading extends TransactionState {}
 
 class TransactionLoaded extends TransactionState {
-  final List<TransactionModel> categories;
+  final List<TransactionModel> transactions;
 
-  TransactionLoaded(this.categories);
+  TransactionLoaded(this.transactions);
 
   @override
-  List<Object?> get props => [categories];
+  List<Object?> get props => [transactions];
 }
 
 class TransactionError extends TransactionState {

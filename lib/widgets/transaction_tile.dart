@@ -1,24 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:money_tracker_app/models/enum/enum.dart';
 import 'package:money_tracker_app/utils/constants/colors.dart';
 import 'package:money_tracker_app/utils/helper_functions.dart';
 
 class MTransactionTile extends StatelessWidget {
-  const MTransactionTile(
-      {super.key,
-      this.iconBgColor = Colors.yellow,
-      this.iconColor = Colors.white,
-      required this.icon,
-      required this.title,
-      this.amount = '',
-      this.date = "",
-      this.showPriceDate = true,
-      this.bgColor});
+  const MTransactionTile({
+    super.key,
+    this.iconBgColor = Colors.yellow,
+    this.iconColor = Colors.white,
+    required this.icon,
+    required this.title,
+    this.amount = 0.0,
+    this.time = "",
+    this.showPriceDate = true,
+    this.bgColor,
+    this.type,
+  });
 
   final Color iconBgColor, iconColor;
   final IconData icon;
-  final String title, amount, date;
+  final String title, time;
+  final double amount;
   final bool showPriceDate;
   final Color? bgColor;
+  final TransactionType? type;
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +33,7 @@ class MTransactionTile extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 16.0),
       child: Container(
         decoration: BoxDecoration(
-          color: bgColor != null
-              ? bgColor
-              : (isDark ? MColors.dark : MColors.light),
+          color: bgColor ?? (isDark ? MColors.dark : MColors.light),
           borderRadius: BorderRadius.circular(14),
         ),
         child: Padding(
@@ -70,15 +73,17 @@ class MTransactionTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      amount,
+                      '${type == TransactionType.income ? '+' : '-'}${amount.toStringAsFixed(2)}',
                       style: TextStyle(
                         fontSize: 14,
-                        color: Theme.of(context).colorScheme.onSurface,
+                        color: type == TransactionType.income
+                            ? Colors.green
+                            : Colors.red,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                     Text(
-                      date,
+                      time,
                       style: TextStyle(
                         fontSize: 14,
                         color: MColors.outline,

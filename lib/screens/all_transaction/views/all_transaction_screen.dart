@@ -58,7 +58,7 @@ class AllTransactionScreen extends StatelessWidget {
                     title: transactionsData[index]['title'],
                     iconBgColor: transactionsData[index]['color'],
                     amount: transactionsData[index]['amount'],
-                    date: transactionsData[index]['date'],
+                    time: transactionsData[index]['date'],
                   );
                 },
               ),

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:money_tracker_app/blocs/transaction/transaction_bloc.dart';
+import 'package:money_tracker_app/models/enum/enum.dart';
 
 import '../../../data/data.dart';
 import '../../../utils/constants/colors.dart';
@@ -14,41 +17,63 @@ class ExpenseScreen extends StatelessWidget {
     final isDark = MHelperFunctions.isDarkMode(context);
 
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              width: MHelperFunctions.screenWidth(context),
-              height: MHelperFunctions.screenWidth(context),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: isDark ? MColors.dark : MColors.light,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(12, 20, 12, 12),
-                child: MBarChart(),
-              ),
-            ),
+      body: BlocConsumer<TransactionBloc, TransactionState>(
+        listener: (context, state) {
+          if (state is TransactionError) {
+            MHelperFunctions.showSnackBar("Error ${state.message}", context);
+          }
+        },
+        builder: (context, state) {
+          if (state is TransactionLoading) {
+            return Center(child: CircularProgressIndicator());
+          } else if (state is TransactionLoaded) {
+            final expenseTransactions = state.transactions
+                .where((transaction) =>
+                    transaction.type == TransactionType.expense)
+                .toList();
 
-            const SizedBox(height: 20),
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    width: MHelperFunctions.screenWidth(context),
+                    height: MHelperFunctions.screenWidth(context),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: isDark ? MColors.dark : MColors.light,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(12, 20, 12, 12),
+                      child: MBarChart(),
+                    ),
+                  ),
 
-            // Transaction Tile
-            ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: transactionsData.length,
-              itemBuilder: (context, index) {
-                return MTransactionTile(
-                  icon: transactionsData[index]['icon'],
-                  title: transactionsData[index]['title'],
-                  iconBgColor: transactionsData[index]['color'],
-                  amount: transactionsData[index]['amount'],
-                  date: transactionsData[index]['date'],
-                );
-              },
-            ),
-          ],
-        ),
+                  const SizedBox(height: 20),
+
+                  // Transaction Tile
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: expenseTransactions.length,
+                    itemBuilder: (context, index) {
+                      final transaction = expenseTransactions[index];
+                      return MTransactionTile(
+                        icon: categoryIcons[transaction.category.iconIndex],
+                        title: transaction.category.title,
+                        iconBgColor: Color(transaction.category.color),
+                        amount: transaction.amount,
+                        time: transaction.time.toString(),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            );
+          } else {
+            return Center(
+              child: Text('No Transactions Found'),
+            );
+          }
+        },
       ),
     );
   }
