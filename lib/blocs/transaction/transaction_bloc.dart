@@ -30,5 +30,7 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
         emit(TransactionError(e.toString()));
       }
     });
+
+    add(LoadTransaction());
   }
 }

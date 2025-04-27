@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:money_tracker_app/blocs/transaction/transaction_bloc.dart';
 import 'package:money_tracker_app/models/enum/enum.dart';
+import 'package:money_tracker_app/utils/constants/sizes.dart';
 
 import '../../../data/data.dart';
 import '../../../utils/constants/colors.dart';
@@ -51,19 +52,23 @@ class ExpenseScreen extends StatelessWidget {
                   const SizedBox(height: 20),
 
                   // Transaction Tile
-                  ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: expenseTransactions.length,
-                    itemBuilder: (context, index) {
-                      final transaction = expenseTransactions[index];
-                      return MTransactionTile(
-                        icon: categoryIcons[transaction.category.iconIndex],
-                        title: transaction.category.title,
-                        iconBgColor: Color(transaction.category.color),
-                        amount: transaction.amount,
-                        time: transaction.time.toString(),
-                      );
-                    },
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: MSizes.md),
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: expenseTransactions.length,
+                      itemBuilder: (context, index) {
+                        final transaction = expenseTransactions[index];
+                        return MTransactionTile(
+                          icon: categoryIcons[transaction.category.iconIndex],
+                          title: transaction.category.title,
+                          iconBgColor: Color(transaction.category.color),
+                          amount: transaction.amount,
+                          time: transaction.time.toString(),
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),

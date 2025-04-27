@@ -34,5 +34,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
         emit(CategoryError(e.toString()));
       }
     });
+
+    add(LoadCategories());
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:money_tracker_app/blocs/transaction/transaction_bloc.dart';
 import 'package:money_tracker_app/data/data.dart';
 import 'package:money_tracker_app/models/enum/enum.dart';
+import 'package:money_tracker_app/utils/constants/sizes.dart';
 
 import '../../../utils/constants/colors.dart';
 import '../../../utils/helper_functions.dart';
@@ -51,19 +52,23 @@ class IncomeScreen extends StatelessWidget {
                   const SizedBox(height: 20),
 
                   // Transaction Tile
-                  ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: incomeTransactions.length,
-                    itemBuilder: (context, index) {
-                      final transaction = incomeTransactions[index];
-                      return MTransactionTile(
-                        icon: categoryIcons[transaction.category.iconIndex],
-                        title: transaction.category.title,
-                        iconBgColor: Color(transaction.category.color),
-                        amount: transaction.amount,
-                        time: transaction.time.toString(),
-                      );
-                    },
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: MSizes.md),
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: incomeTransactions.length,
+                      itemBuilder: (context, index) {
+                        final transaction = incomeTransactions[index];
+                        return MTransactionTile(
+                          icon: categoryIcons[transaction.category.iconIndex],
+                          title: transaction.category.title,
+                          iconBgColor: Color(transaction.category.color),
+                          amount: transaction.amount,
+                          time: transaction.time.toString(),
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),

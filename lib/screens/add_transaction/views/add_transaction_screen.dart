@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -107,7 +105,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                     readOnly: true,
                     fillColor: _selectedCategory != CategoryModel.empty()
                         ? Color(_selectedCategory.color)
-                        : null,
+                        : (isDark ? MColors.dark : MColors.light),
                     prefixIcon: _selectedCategory != CategoryModel.empty()
                         ? categoryIcons[_selectedCategory.iconIndex]
                         : FontAwesomeIcons.list,
@@ -167,6 +165,8 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                                       child: CircularProgressIndicator());
                                 } else if (state is CategoryLoaded) {
                                   return ListView.builder(
+                                    physics: BouncingScrollPhysics(),
+                                    shrinkWrap: true,
                                     itemCount: state.categories.length,
                                     itemBuilder: (context, index) {
                                       final reversedCategories =
@@ -179,10 +179,6 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                                             _selectedCategory = category;
                                             categoryController.text =
                                                 category.title;
-                                            Timer(
-                                                Duration(seconds: 1),
-                                                () => setState(
-                                                    () => isExpanded = false));
                                           });
                                         },
                                         child: MTransactionTile(

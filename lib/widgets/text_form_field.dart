@@ -47,11 +47,13 @@ class MTextFormField extends StatelessWidget {
         hintText: hintText,
         isDense: isDense,
         prefixIcon: Icon(prefixIcon, size: 16, color: Colors.grey),
-        suffixIcon: IconButton(
-          onPressed: onIconPressed,
-          icon: Icon(suffixIcon, size: 16, color: Colors.grey),
-        ),
-        suffix: suffixWidget,
+        suffixIcon: suffixWidget ??
+            (suffixIcon != null
+                ? IconButton(
+                    onPressed: onIconPressed,
+                    icon: Icon(suffixIcon, size: 16, color: Colors.grey),
+                  )
+                : null),
         border: OutlineInputBorder(
           borderRadius: isOpened
               ? BorderRadius.vertical(top: Radius.circular(15))

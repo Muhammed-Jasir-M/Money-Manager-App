@@ -68,7 +68,9 @@ class _MCategoryAlertDialogState extends State<MCategoryAlertDialog> {
                 onIconPressed: () => setState(() => isExpanded = !isExpanded),
                 onTap: () => setState(() => isExpanded = !isExpanded),
                 isOpened: isExpanded,
-                prefixIcon: FontAwesomeIcons.icons,
+                prefixIcon: categoryIcons.isNotEmpty
+                    ? categoryIcons[iconSelected]
+                    : FontAwesomeIcons.icons,
                 suffixIcon: isExpanded
                     ? CupertinoIcons.chevron_up
                     : CupertinoIcons.chevron_down,
@@ -137,15 +139,13 @@ class _MCategoryAlertDialogState extends State<MCategoryAlertDialog> {
                 controller: colorController,
                 readOnly: true,
                 prefixIcon: Icons.color_lens_rounded,
-                suffixWidget: Align(
-                  alignment: Alignment.centerRight,
-                  child: Container(
-                    width: 20,
-                    height: 20,
-                    decoration: BoxDecoration(
-                      color: selectedColor,
-                      shape: BoxShape.circle,
-                    ),
+                suffixWidget: Container(
+                  width: 20,
+                  height: 20,
+                  decoration: BoxDecoration(
+                    color: selectedColor,
+                    shape: BoxShape.circle,
+                    border: Border.all(color: Colors.grey.shade400),
                   ),
                 ),
                 onTap: () async {
