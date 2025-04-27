@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:money_tracker_app/screens/add_transaction/blocs/category/category_bloc.dart';
 import 'package:money_tracker_app/screens/add_transaction/widget/category_alert_dialog.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:money_tracker_app/utils/constants/colors.dart';
 import 'package:money_tracker_app/utils/constants/enums.dart';
 import 'package:money_tracker_app/utils/constants/sizes.dart';
@@ -24,6 +26,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
   final timeController = TextEditingController();
 
   CategoryType? _categoryType;
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -65,19 +68,38 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                 readOnly: true,
                 prefixIcon: FontAwesomeIcons.list,
                 suffixIcon: FontAwesomeIcons.plus,
-                onTap: () async {
-                  return showDialog(
-                    context: context,
-                    builder: (ctx) {
-                      return MCategoryAlertDialog();
-                    },
-                  );
+                onTap: () {
+                  // show category dropdown by fetching categories from the hive using bloc
                 },
                 onIconPressed: () async {
-                  return showDialog(
+                  await showDialog(
                     context: context,
                     builder: (ctx) {
-                      return MCategoryAlertDialog();
+                      return BlocProvider.value(
+                        value: BlocProvider.of<CategoryBloc>(context),
+                        child: BlocListener<CategoryBloc, CategoryState>(
+                          listener: (context, state) {
+                            if (state is CategoryLoading) {
+                              setState(() {
+                                isLoading = true;
+                              });
+                            } else if (state is CategoryLoaded) {
+                              setState(() {
+                                isLoading = false;
+                              });
+                              Navigator.pop(ctx);
+                            } else if (state is CategoryError) {
+                              setState(() {
+                                isLoading = false;
+                              });
+                              MHelperFunctions.showSnackBar(
+                                  "Error: ${state.message}", context);
+                              Navigator.pop(ctx);
+                            }
+                          },
+                          child: MCategoryAlertDialog(),
+                        ),
+                      );
                     },
                   );
                 },
@@ -91,18 +113,8 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                 prefixIcon: FontAwesomeIcons.indianRupeeSign,
                 keyboardType: TextInputType.number,
               ),
+
               const SizedBox(height: MSizes.spaceBtwInputFields),
-
-              /// Category Type
-              Text(
-                'Category Type',
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-
-              const SizedBox(height: MSizes.sm),
 
               Row(
                 children: [

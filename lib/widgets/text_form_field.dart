@@ -16,6 +16,7 @@ class MTextFormField extends StatelessWidget {
     this.isOpened = false,
     this.fillColor,
     this.isDense = false,
+    this.suffixWidget,
   });
 
   final TextEditingController? controller;
@@ -27,11 +28,12 @@ class MTextFormField extends StatelessWidget {
   final bool readOnly, isOpened, isDense;
   final VoidCallback? onTap;
   final VoidCallback? onIconPressed;
+  final Widget? suffixWidget;
 
   @override
   Widget build(BuildContext context) {
     final isDark = MHelperFunctions.isDarkMode(context);
-    
+
     return TextFormField(
       onTap: onTap,
       readOnly: readOnly,
@@ -46,6 +48,7 @@ class MTextFormField extends StatelessWidget {
           onPressed: onIconPressed,
           icon: Icon(suffixIcon, size: 16, color: Colors.grey),
         ),
+        suffix: suffixWidget,
         border: OutlineInputBorder(
           borderRadius: isOpened
               ? BorderRadius.vertical(top: Radius.circular(15))

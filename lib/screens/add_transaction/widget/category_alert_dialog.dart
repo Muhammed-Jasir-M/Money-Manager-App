@@ -2,8 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:money_tracker_app/models/category/category_model.dart';
+import 'package:money_tracker_app/screens/add_transaction/blocs/category/category_bloc.dart';
 import 'package:money_tracker_app/utils/constants/colors.dart';
 import 'package:money_tracker_app/utils/constants/sizes.dart';
 import 'package:money_tracker_app/utils/helper_functions.dart';
@@ -20,8 +23,9 @@ class MCategoryAlertDialog extends StatefulWidget {
 
 class _MCategoryAlertDialogState extends State<MCategoryAlertDialog> {
   bool isExpanded = false;
-  IconData iconSelected = FontAwesomeIcons.utensils;
-  Color selectedColor = Colors.yellow;
+  IconData? iconSelected = FontAwesomeIcons.cartShopping;
+  Color selectedColor = Colors.blue;
+  bool isLoading = false;
 
   final titleController = TextEditingController();
   final iconController = TextEditingController();
@@ -130,7 +134,14 @@ class _MCategoryAlertDialogState extends State<MCategoryAlertDialog> {
               controller: colorController,
               readOnly: true,
               prefixIcon: Icons.color_lens_rounded,
-              fillColor: selectedColor,
+              suffixWidget: Container(
+                width: 10,
+                height: 10,
+                decoration: BoxDecoration(
+                  color: selectedColor,
+                  shape: BoxShape.circle,
+                ),
+              ),
               onTap: () async {
                 return showDialog(
                   context: context,
@@ -162,8 +173,9 @@ class _MCategoryAlertDialogState extends State<MCategoryAlertDialog> {
                                   child: Text(
                                     'Save',
                                     style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w500),
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -184,7 +196,30 @@ class _MCategoryAlertDialogState extends State<MCategoryAlertDialog> {
               height: 50,
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pop(context);
+                  if (titleController.text.isEmpty) {
+                    MHelperFunctions.showSnackBar(
+                        "Please enter a title", context);
+                  } else if (iconSelected == null) {
+                    MHelperFunctions.showSnackBar(
+                        "Please select an icon", context);
+                  } else {
+                    setState(() {
+                      isLoading = true;
+                    });
+                  }
+
+                  context.read<CategoryBloc>().add(
+                        AddCategory(
+                          CategoryModel(
+                            title: titleController.text,
+                            icon: iconSelected.toString(),
+                            color: selectedColor.toString(),
+                            categoryId: DateTime.now()
+                                .millisecondsSinceEpoch
+                                .toString(),
+                          ),
+                        ),
+                      );
                 },
                 child: Container(
                   decoration: BoxDecoration(
@@ -192,10 +227,15 @@ class _MCategoryAlertDialogState extends State<MCategoryAlertDialog> {
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Center(
-                    child: Text(
-                      'Save',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-                    ),
+                    child: isLoading
+                        ? CircularProgressIndicator()
+                        : Text(
+                            'Save',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
                   ),
                 ),
               ),
