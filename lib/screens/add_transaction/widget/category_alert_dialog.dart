@@ -23,7 +23,7 @@ class MCategoryAlertDialog extends StatefulWidget {
 
 class _MCategoryAlertDialogState extends State<MCategoryAlertDialog> {
   bool isExpanded = false;
-  IconData? iconSelected = FontAwesomeIcons.cartShopping;
+  int iconSelected = 3;
   Color selectedColor = Colors.blue;
   bool isLoading = false;
 
@@ -98,7 +98,7 @@ class _MCategoryAlertDialogState extends State<MCategoryAlertDialog> {
                           return GestureDetector(
                             onTap: () {
                               setState(() {
-                                iconSelected = categoryIcons[index];
+                                iconSelected = index;
                                 Timer(Duration(seconds: 1),
                                     () => setState(() => isExpanded = false));
                               });
@@ -108,7 +108,8 @@ class _MCategoryAlertDialogState extends State<MCategoryAlertDialog> {
                               decoration: BoxDecoration(
                                   border: Border.all(
                                     width: 3,
-                                    color: iconSelected == categoryIcons[index]
+                                    color: categoryIcons[iconSelected] ==
+                                            categoryIcons[index]
                                         ? Colors.green
                                         : Colors.grey,
                                   ),
@@ -199,9 +200,6 @@ class _MCategoryAlertDialogState extends State<MCategoryAlertDialog> {
                   if (titleController.text.isEmpty) {
                     MHelperFunctions.showSnackBar(
                         "Please enter a title", context);
-                  } else if (iconSelected == null) {
-                    MHelperFunctions.showSnackBar(
-                        "Please select an icon", context);
                   } else {
                     setState(() {
                       isLoading = true;
@@ -212,8 +210,8 @@ class _MCategoryAlertDialogState extends State<MCategoryAlertDialog> {
                         AddCategory(
                           CategoryModel(
                             title: titleController.text,
-                            icon: iconSelected.toString(),
-                            color: selectedColor.toString(),
+                            iconIndex: iconSelected,
+                            color: selectedColor.value,
                             categoryId: DateTime.now()
                                 .millisecondsSinceEpoch
                                 .toString(),

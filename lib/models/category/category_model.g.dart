@@ -19,8 +19,8 @@ class CategoryModelAdapter extends TypeAdapter<CategoryModel> {
     return CategoryModel(
       categoryId: fields[0] as String,
       title: fields[1] as String,
-      icon: fields[2] as String,
-      color: fields[3] as String,
+      iconIndex: fields[2] as int,
+      color: fields[3] as int,
     );
   }
 
@@ -33,7 +33,7 @@ class CategoryModelAdapter extends TypeAdapter<CategoryModel> {
       ..writeByte(1)
       ..write(obj.title)
       ..writeByte(2)
-      ..write(obj.icon)
+      ..write(obj.iconIndex)
       ..writeByte(3)
       ..write(obj.color);
   }

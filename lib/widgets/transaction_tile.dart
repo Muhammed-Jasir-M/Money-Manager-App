@@ -9,13 +9,15 @@ class MTransactionTile extends StatelessWidget {
     this.iconColor = Colors.white,
     required this.icon,
     required this.title,
-    required this.amount,
-    required this.date,
+    this.amount = '',
+    this.date = "",
+    this.showPriceDate = true,
   });
 
   final Color color, iconColor;
   final IconData icon;
   final String title, amount, date;
+  final bool showPriceDate;
 
   @override
   Widget build(BuildContext context) {
@@ -60,27 +62,29 @@ class MTransactionTile extends StatelessWidget {
                   ),
                 ],
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    amount,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Theme.of(context).colorScheme.onSurface,
-                      fontWeight: FontWeight.w600,
+              if (showPriceDate)
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      amount,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Theme.of(context).colorScheme.onSurface,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  ),
-                  Text(
-                    date,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: MColors.outline,
-                      fontWeight: FontWeight.w400,
+                    Text(
+                      date,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: MColors.outline,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
+              if (!showPriceDate) Container()
             ],
           ),
         ),

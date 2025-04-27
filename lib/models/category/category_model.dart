@@ -11,15 +11,15 @@ class CategoryModel extends HiveObject {
   String title;
 
   @HiveField(2)
-  String icon;
+  int iconIndex;
 
   @HiveField(3)
-  String color;
+  int color;
 
   CategoryModel({
     required this.categoryId,
     required this.title,
-    required this.icon,
+    required this.iconIndex,
     required this.color,
   });
 }
