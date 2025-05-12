@@ -3,12 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:money_tracker_app/blocs/transaction/transaction_bloc.dart';
 import 'package:money_tracker_app/data/data.dart';
 import 'package:money_tracker_app/models/enum/enum.dart';
+import 'package:money_tracker_app/screens/stats/widgets/chart.dart';
 import 'package:money_tracker_app/utils/constants/sizes.dart';
 
 import '../../utils/constants/colors.dart';
 import '../../utils/helper_functions.dart';
 import '../../widgets/transaction_tile.dart';
-import 'widgets/chart.dart';
 
 class IncomeScreen extends StatelessWidget {
   const IncomeScreen({super.key});
@@ -41,8 +41,22 @@ class IncomeScreen extends StatelessWidget {
         builder: (context, state) {
           if (state is TransactionLoading) {
             return Center(child: CircularProgressIndicator());
-          } else if (state is TransactionLoaded) {
-            final incomeTransactions = state.transactions
+          } else if (state is TransactionLoaded ||
+              state is TransactionSuccess) {
+            final transactions = state is TransactionLoaded
+                ? state.transactions
+                : (state as TransactionSuccess).transactions;
+
+            if (transactions.isEmpty) {
+              return const SizedBox(
+                height: 50,
+                child: Center(
+                  child: Text('No transactions availablel'),
+                ),
+              );
+            }
+
+            final incomeTransactions = transactions
                 .where(
                     (transaction) => transaction.type == TransactionType.income)
                 .toList();
@@ -59,7 +73,10 @@ class IncomeScreen extends StatelessWidget {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(12, 20, 12, 12),
-                      child: MBarChart(),
+                      child: MBarChart(
+                        transactions: incomeTransactions,
+                        type: TransactionType.income,
+                      ),
                     ),
                   ),
 

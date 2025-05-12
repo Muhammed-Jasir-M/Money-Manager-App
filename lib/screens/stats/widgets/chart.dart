@@ -1,35 +1,42 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:money_tracker_app/models/enum/enum.dart';
+import 'package:money_tracker_app/models/transaction/transaction_model.dart';
 import 'package:money_tracker_app/utils/constants/colors.dart';
 
 class MBarChart extends StatelessWidget {
-  const MBarChart({super.key});
+  final List<TransactionModel> transactions;
+  final TransactionType type;
 
-  List<BarChartGroupData> showGroups() => List.generate(
-        8,
-        (i) {
-          switch (i) {
-            case 0:
-              return makeGroupData(0, 2);
-            case 1:
-              return makeGroupData(1, 3);
-            case 2:
-              return makeGroupData(2, 2);
-            case 3:
-              return makeGroupData(3, 4.5);
-            case 4:
-              return makeGroupData(4, 3.8);
-            case 5:
-              return makeGroupData(5, 1.5);
-            case 6:
-              return makeGroupData(6, 4);
-            case 7:
-              return makeGroupData(7, 3.8);
-            default:
-              return throw Error();
-          }
-        },
+  const MBarChart({
+    super.key,
+    required this.transactions,
+    required this.type,
+  });
+
+  List<BarChartGroupData> showGroups() {
+    // Group transactions by day and sum amounts
+    final Map<int, double> dailyTotals = {};
+
+    for (final transaction in transactions) {
+      if (transaction.type != type) continue;
+
+      // Parse date from transaction (assuming format is 'dd/MM/yyyy')
+      final dateParts = transaction.date.split('/');
+      final day = int.parse(dateParts[0]);
+
+      dailyTotals.update(
+        day,
+        (value) => value + transaction.amount,
+        ifAbsent: () => transaction.amount,
       );
+    }
+
+    // Create bar chart data
+    return dailyTotals.entries.map((entry) {
+      return makeGroupData(entry.key, entry.value);
+    }).toList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +64,12 @@ class MBarChart extends StatelessWidget {
         borderData: FlBorderData(show: false),
         gridData: FlGridData(show: false),
         barGroups: showGroups(),
+        // Set max Y value based on highest transaction
+        maxY: transactions.fold(
+          0,
+          (max, transaction) =>
+              transaction.amount > max! ? transaction.amount + 1000 : max,
+        ),
       ),
     );
   }
@@ -68,35 +81,10 @@ class MBarChart extends StatelessWidget {
       fontSize: 14,
     );
 
-    String text;
-
-    switch (value) {
-      case 0:
-        text = '1k';
-        break;
-      case 1:
-        text = '2k';
-        break;
-      case 2:
-        text = '3k';
-        break;
-      case 3:
-        text = '4k';
-        break;
-      case 4:
-        text = '5k';
-        break;
-      case 5:
-        text = '6k';
-        break;
-      default:
-        return Container();
-    }
-
     return SideTitleWidget(
       meta: meta,
       space: 16,
-      child: Text(text, style: style),
+      child: Text('${value.toInt()}k', style: style),
     );
   }
 
@@ -107,42 +95,10 @@ class MBarChart extends StatelessWidget {
       fontSize: 14,
     );
 
-    Widget text;
-
-    switch (value.toInt()) {
-      case 0:
-        text = const Text('01', style: style);
-        break;
-      case 1:
-        text = const Text('02', style: style);
-        break;
-      case 2:
-        text = const Text('03', style: style);
-        break;
-      case 3:
-        text = const Text('04', style: style);
-        break;
-      case 4:
-        text = const Text('05', style: style);
-        break;
-      case 5:
-        text = const Text('06', style: style);
-        break;
-      case 6:
-        text = const Text('07', style: style);
-        break;
-      case 7:
-        text = const Text('08', style: style);
-        break;
-      default:
-        text = const Text('', style: style);
-        break;
-    }
-
     return SideTitleWidget(
       meta: meta,
       space: 16,
-      child: text,
+      child: Text(value.toInt().toString(), style: style),
     );
   }
 }
@@ -157,7 +113,7 @@ BarChartGroupData makeGroupData(int x, double y) {
         gradient: MColors.barChartGradient,
         backDrawRodData: BackgroundBarChartRodData(
           show: true,
-          toY: 5,
+          toY: y * 1.2,
           color: Colors.grey.shade300,
         ),
       )

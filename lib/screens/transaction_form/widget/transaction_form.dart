@@ -9,7 +9,7 @@ import 'package:money_tracker_app/models/enum/enum.dart';
 import 'package:money_tracker_app/models/transaction/transaction_model.dart';
 import 'package:money_tracker_app/blocs/category/category_bloc.dart';
 import 'package:money_tracker_app/blocs/transaction/transaction_bloc.dart';
-import 'package:money_tracker_app/screens/add_transaction/add_category_screen.dart';
+import 'package:money_tracker_app/screens/transaction_form/add_category_screen.dart';
 import 'package:money_tracker_app/utils/constants/colors.dart';
 import 'package:money_tracker_app/utils/constants/sizes.dart';
 import 'package:money_tracker_app/utils/helper_functions.dart';

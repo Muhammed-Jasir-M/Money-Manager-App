@@ -43,8 +43,22 @@ class HomeScreen extends StatelessWidget {
           builder: (context, state) {
             if (state is TransactionLoading) {
               return Center(child: CircularProgressIndicator());
-            } else if (state is TransactionLoaded) {
-              final totals = _calculateTotals(state.transactions);
+            } else if (state is TransactionLoaded ||
+                state is TransactionSuccess) {
+              final transactions = state is TransactionLoaded
+                  ? state.transactions
+                  : (state as TransactionSuccess).transactions;
+
+              if (transactions.isEmpty) {
+                return const SizedBox(
+                  height: 50,
+                  child: Center(
+                    child: Text('No transactions availablel'),
+                  ),
+                );
+              }
+
+              final totals = _calculateTotals(transactions);
 
               return Column(
                 children: [
@@ -77,9 +91,9 @@ class HomeScreen extends StatelessWidget {
                   ListView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: state.transactions.length,
+                    itemCount: transactions.length,
                     itemBuilder: (context, index) {
-                      final transaction = state.transactions[index];
+                      final transaction = transactions[index];
 
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:money_tracker_app/screens/add_transaction/add_transaction_screen.dart';
+import 'package:money_tracker_app/screens/transaction_form/add_transaction_screen.dart';
 import 'package:money_tracker_app/utils/constants/colors.dart';
 import 'package:money_tracker_app/utils/helper_functions.dart';
 
