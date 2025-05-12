@@ -67,19 +67,40 @@ class IncomeScreen extends StatelessWidget {
 
                   // Transaction Tile
                   Padding(
-                    padding: const EdgeInsets.only(bottom: MSizes.md),
+                    padding: const EdgeInsets.only(bottom: MSizes.sm),
                     child: ListView.builder(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
                       itemCount: incomeTransactions.length,
                       itemBuilder: (context, index) {
                         final transaction = incomeTransactions[index];
-                        return MTransactionTile(
-                          icon: categoryIcons[transaction.category.iconIndex],
-                          title: transaction.category.title,
-                          iconBgColor: Color(transaction.category.color),
-                          amount: transaction.amount,
-                          time: transaction.time.toString(),
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
+                              child: Text(
+                                MHelperFunctions.formatDateHeader(
+                                    transaction.date),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleSmall
+                                    ?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                              ),
+                            ),
+                            MTransactionTile(
+                              icon:
+                                  categoryIcons[transaction.category.iconIndex],
+                              title: transaction.category.title,
+                              iconBgColor: Color(transaction.category.color),
+                              amount: transaction.amount,
+                              time: transaction.time.toString(),
+                              type: transaction.type,
+                            ),
+                          ],
                         );
                       },
                     ),

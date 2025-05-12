@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:money_tracker_app/blocs/transaction/transaction_bloc.dart';
 import 'package:money_tracker_app/data/data.dart';
+import 'package:money_tracker_app/models/enum/enum.dart';
+import 'package:money_tracker_app/models/transaction/transaction_model.dart';
 import 'package:money_tracker_app/screens/all_transaction/all_transaction_screen.dart';
 import 'package:money_tracker_app/screens/home/widgets/gradient_card.dart';
 import 'package:money_tracker_app/screens/home/widgets/home_appbar.dart';
@@ -42,6 +44,8 @@ class HomeScreen extends StatelessWidget {
             if (state is TransactionLoading) {
               return Center(child: CircularProgressIndicator());
             } else if (state is TransactionLoaded) {
+              final totals = _calculateTotals(state.transactions);
+
               return Column(
                 children: [
                   // Appbar
@@ -49,7 +53,12 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: 20),
 
                   // Gradient Balance Card
-                  MGradientBalanceCard(),
+                  MGradientBalanceCard(
+                    totalBalance: totals['balance'] ?? 0,
+                    totalIncome: totals['income'] ?? 0,
+                    totalExpense: totals['expense'] ?? 0,
+                  ),
+
                   const SizedBox(height: 20),
 
                   // Section Heading
@@ -71,13 +80,32 @@ class HomeScreen extends StatelessWidget {
                     itemCount: state.transactions.length,
                     itemBuilder: (context, index) {
                       final transaction = state.transactions[index];
-                      return MTransactionTile(
-                        icon: categoryIcons[transaction.category.iconIndex],
-                        title: transaction.category.title,
-                        iconBgColor: Color(transaction.category.color),
-                        amount: transaction.amount,
-                        time: transaction.time.toString(),
-                        type: transaction.type,
+
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: Text(
+                              MHelperFunctions.formatDateHeader(
+                                  transaction.date),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall
+                                  ?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                            ),
+                          ),
+                          MTransactionTile(
+                            icon: categoryIcons[transaction.category.iconIndex],
+                            title: transaction.category.title,
+                            iconBgColor: Color(transaction.category.color),
+                            amount: transaction.amount,
+                            time: transaction.time.toString(),
+                            type: transaction.type,
+                          ),
+                        ],
                       );
                     },
                   ),
@@ -92,5 +120,24 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  dynamic _calculateTotals(List<TransactionModel> transactions) {
+    double income = 0;
+    double expense = 0;
+
+    for (var transaction in transactions) {
+      if (transaction.type == TransactionType.income) {
+        income += transaction.amount;
+      } else {
+        expense += transaction.amount;
+      }
+    }
+
+    return {
+      'income': income,
+      'expense': expense,
+      'balance': income - expense,
+    };
   }
 }

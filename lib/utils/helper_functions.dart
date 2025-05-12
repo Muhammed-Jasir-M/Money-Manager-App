@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:money_tracker_app/utils/constants/sizes.dart';
 
 class MHelperFunctions {
@@ -106,5 +107,24 @@ class MHelperFunctions {
         elevation: 0,
       ),
     );
+  }
+
+  static String formatDateHeader(String dateString) {
+    final date = DateTime.parse(dateString);
+
+    final today = DateTime.now();
+    final yesterday = today.subtract(const Duration(days: 1));
+
+    if (date.year == today.year &&
+        date.month == today.month &&
+        date.day == today.day) {
+      return 'Today';
+    } else if (date.year == yesterday.year &&
+        date.month == yesterday.month &&
+        date.day == yesterday.day) {
+      return 'Yesterday';
+    } else {
+      return DateFormat('MMM dd, yyyy').format(date);
+    }
   }
 }

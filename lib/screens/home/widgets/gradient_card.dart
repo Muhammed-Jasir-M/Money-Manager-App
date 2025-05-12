@@ -4,7 +4,16 @@ import 'package:money_tracker_app/utils/helper_functions.dart';
 import 'package:money_tracker_app/widgets/price_info_tile.dart';
 
 class MGradientBalanceCard extends StatelessWidget {
-  const MGradientBalanceCard({super.key});
+  const MGradientBalanceCard({
+    super.key,
+    required this.totalBalance,
+    required this.totalIncome,
+    required this.totalExpense,
+  });
+
+  final double totalBalance;
+  final double totalIncome;
+  final double totalExpense;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +48,7 @@ class MGradientBalanceCard extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            '\u{20B9} 4250.00',
+            '\u{20B9} ${totalBalance.toStringAsFixed(2)}',
             style: TextStyle(
               fontSize: 40,
               color: Colors.white,
@@ -54,11 +63,11 @@ class MGradientBalanceCard extends StatelessWidget {
               children: [
                 MPriceInfoTextWithIcon(
                   title: 'Income',
-                  amount: '\u{20B9} 4250.00'
+                  amount: '\u{20B9} ${totalIncome.toStringAsFixed(2)}',
                 ),
                 MPriceInfoTextWithIcon(
                   title: 'Expenses',
-                  amount: '\u{20B9} 4250.00',
+                  amount: '\u{20B9} ${totalExpense.toStringAsFixed(2)}',
                 ),
               ],
             ),
