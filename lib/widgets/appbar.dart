@@ -8,6 +8,7 @@ class MAppBar extends StatelessWidget implements PreferredSizeWidget {
     super.key,
     this.title,
     this.showBackArrow = false,
+    this.centerTitle = true,
     this.leadingIcon,
     this.actions,
     this.leadingOnPressed,
@@ -15,7 +16,7 @@ class MAppBar extends StatelessWidget implements PreferredSizeWidget {
   });
 
   final Widget? title;
-  final bool showBackArrow;
+  final bool showBackArrow, centerTitle;
   final IconData? leadingIcon;
   final List<Widget>? actions;
   final VoidCallback? leadingOnPressed;
@@ -26,9 +27,11 @@ class MAppBar extends StatelessWidget implements PreferredSizeWidget {
     final isDark = MHelperFunctions.isDarkMode(context);
 
     return AppBar(
+      titleSpacing: 0,
       elevation: 0,
+      centerTitle: centerTitle,
       automaticallyImplyLeading: false,
-      leadingWidth: 40.0,
+      leadingWidth: 48.0,
       leading: showBackArrow
           ? IconButton(
               onPressed: () => Navigator.of(context).pop(),

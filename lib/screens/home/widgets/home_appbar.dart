@@ -9,6 +9,7 @@ class MHomeAppbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MAppBar(
+      centerTitle: false,
       leadingWidget: Stack(
         alignment: Alignment.center,
         children: [
@@ -30,7 +31,7 @@ class MHomeAppbar extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Welcome!',
+            'Welcome back!',
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w600,

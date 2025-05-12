@@ -1,29 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:money_tracker_app/utils/constants/colors.dart';
+import 'package:money_tracker_app/utils/constants/sizes.dart';
+import 'package:money_tracker_app/utils/theme/appbar_theme.dart';
+import 'package:money_tracker_app/utils/theme/text_theme.dart';
 
 class MAppTheme {
-  static ThemeData lightTheme = ThemeData(
+  MAppTheme._();
+
+  // Light Theme
+  static final ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.light,
     primaryColor: MColors.primary,
     scaffoldBackgroundColor: MColors.bgLight,
-    appBarTheme: AppBarTheme(backgroundColor: MColors.bgLight),
+    disabledColor: MColors.lightGrey,
+    appBarTheme: MAppbarTheme.lightAppbarTheme,
+    textTheme: MTextTheme.lightTextTheme,
+    iconTheme: IconThemeData(color: MColors.dark, size: MSizes.iconMd),
     colorScheme: ColorScheme.light(
       surface: MColors.bgLight,
       onSurface: MColors.black,
       primary: MColors.primary,
       secondary: MColors.secondary,
       tertiary: MColors.tertiary,
-      outline: Colors.grey.shade400,
     ),
   );
 
-  static ThemeData darkTheme = ThemeData(
+  // Dark Theme
+  static final ThemeData darkTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.dark,
     primaryColor: MColors.primary,
     scaffoldBackgroundColor: MColors.bgDark,
-    appBarTheme: AppBarTheme(backgroundColor: MColors.bgDark),
+    disabledColor: MColors.darkGrey,
+    appBarTheme: MAppbarTheme.darkAppbarTheme,
+    textTheme: MTextTheme.darkTextTheme,
+    iconTheme: IconThemeData(color: MColors.light, size: MSizes.iconMd),
     colorScheme: ColorScheme.dark(
       surface: MColors.bgDark,
       onSurface: MColors.white,

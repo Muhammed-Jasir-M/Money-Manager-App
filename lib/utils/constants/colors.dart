@@ -16,6 +16,11 @@ class MColors {
   static const secondary = Color(0xFFE064F7);
   static const tertiary = Color(0xFFFF8D6C);
 
+  static const Color darkerGrey = Color(0xFF4F4F4F);
+  static const Color darkGrey = Color(0xFF2E2E2E);
+  static const Color lightGrey = Color(0xFFF0EDED);
+  static const Color softGrey = Color(0xFFF4F4F4);
+
   static const outline = Color(0xFFBDBDBD);
 
   static const Gradient floatingButtonGradient = LinearGradient(

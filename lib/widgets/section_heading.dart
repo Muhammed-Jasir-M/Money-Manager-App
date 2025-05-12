@@ -26,11 +26,7 @@ class MSectionHeading extends StatelessWidget {
         // Heading Text
         Text(
           title,
-          style: TextStyle(
-            color: darkMode ? MColors.white : MColors.black,
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
+          style: Theme.of(context).textTheme.headlineSmall,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
@@ -41,10 +37,7 @@ class MSectionHeading extends StatelessWidget {
             onPressed: onPressed,
             style: TextButton.styleFrom(
               foregroundColor: darkMode ? MColors.white : MColors.outline,
-              textStyle: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-              ),
+              textStyle: Theme.of(context).textTheme.bodyMedium,
             ),
             child: Text(buttontitle),
           ),

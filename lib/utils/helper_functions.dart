@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:money_tracker_app/utils/constants/sizes.dart';
 
 class MHelperFunctions {
   static bool isDarkMode(BuildContext context) {
@@ -25,12 +26,6 @@ class MHelperFunctions {
     return kToolbarHeight;
   }
 
-  static void showSnackBar(String message, BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message)),
-    );
-  }
-
   static void showAlert(String title, String message, BuildContext context) {
     showDialog(
       context: context,
@@ -53,6 +48,63 @@ class MHelperFunctions {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (_) => screen),
+    );
+  }
+
+  static void showSnackBar({
+    required String title,
+    required String message,
+    required IconData icon,
+    required BuildContext context,
+    required Color bgColor,
+    Duration duration = const Duration(seconds: 1),
+    SnackBarAction? action,
+  }) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Container(
+          padding: const EdgeInsets.all(MSizes.sm),
+          width: double.infinity,
+          height: 80,
+          decoration: BoxDecoration(
+            color: bgColor,
+            borderRadius: BorderRadius.circular(MSizes.sm),
+          ),
+          child: Row(
+            children: [
+              Icon(icon, color: Colors.white, size: 40),
+              SizedBox(width: 20),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: Theme.of(
+                        context,
+                      ).textTheme.titleLarge!.copyWith(color: Colors.white),
+                    ),
+                    const SizedBox(height: MSizes.xs),
+                    Text(
+                      message,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodyMedium!.copyWith(color: Colors.white70),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        backgroundColor: Colors.transparent,
+        duration: duration,
+        action: action,
+        behavior: SnackBarBehavior.floating,
+        elevation: 0,
+      ),
     );
   }
 }
