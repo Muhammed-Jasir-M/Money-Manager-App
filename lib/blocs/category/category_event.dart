@@ -15,3 +15,21 @@ class AddCategory extends CategoryEvent {
   @override
   List<Object?> get props => [category];
 }
+
+class UpdateCategory extends CategoryEvent {
+  final CategoryModel category;
+
+  UpdateCategory(this.category);
+
+  @override
+  List<Object?> get props => [category];
+}
+
+class DeleteCategory extends CategoryEvent {
+  final CategoryModel category;
+
+  DeleteCategory(this.category);
+
+  @override
+  List<Object?> get props => [category];
+}

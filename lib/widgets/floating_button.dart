@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:money_tracker_app/blocs/category/category_bloc.dart';
 import 'package:money_tracker_app/screens/add_transaction/add_transaction_screen.dart';
 import 'package:money_tracker_app/utils/constants/colors.dart';
+import 'package:money_tracker_app/utils/helper_functions.dart';
 
 class MFloatingActionButton extends StatelessWidget {
   const MFloatingActionButton({super.key});
@@ -12,19 +11,9 @@ class MFloatingActionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton(
       backgroundColor: MColors.primary,
-      onPressed: () => Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) => MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (_) => CategoryBloc(),
-              ),
-            ],
-            child: const AddTransactionScreen(),
-          ),
-        ),
-      ),
+      onPressed: () {
+        MHelperFunctions.navigateToScreen(context, AddTransactionScreen());
+      },
       shape: CircleBorder(),
       child: Container(
         width: 60,

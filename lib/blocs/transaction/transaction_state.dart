@@ -18,6 +18,16 @@ class TransactionLoaded extends TransactionState {
   List<Object?> get props => [transactions];
 }
 
+class TransactionSuccess extends TransactionState {
+  final List<TransactionModel> transactions;
+  final String message;
+
+  TransactionSuccess({required this.transactions, required this.message});
+
+  @override
+  List<Object?> get props => [transactions, message];
+}
+
 class TransactionError extends TransactionState {
   final String message;
 

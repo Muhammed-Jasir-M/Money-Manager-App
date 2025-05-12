@@ -15,3 +15,21 @@ class AddTransaction extends TransactionEvent {
   @override
   List<Object?> get props => [transaction];
 }
+
+class UpdateTransaction extends TransactionEvent {
+  final TransactionModel transaction;
+
+  UpdateTransaction(this.transaction);
+
+  @override
+  List<Object?> get props => [transaction];
+}
+
+class DeleteTransaction extends TransactionEvent {
+  final TransactionModel transaction;
+
+  DeleteTransaction(this.transaction);
+
+  @override
+  List<Object?> get props => [transaction];
+}

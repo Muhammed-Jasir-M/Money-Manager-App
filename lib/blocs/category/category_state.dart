@@ -18,6 +18,16 @@ class CategoryLoaded extends CategoryState {
   List<Object?> get props => [categories];
 }
 
+class CategorySuccess extends CategoryState {
+  final List<CategoryModel> categories;
+  final String message;
+
+  CategorySuccess({required this.categories, required this.message});
+
+  @override
+  List<Object?> get props => [categories, message];
+}
+
 class CategoryError extends CategoryState {
   final String message;
 

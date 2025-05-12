@@ -21,7 +21,21 @@ class HomeScreen extends StatelessWidget {
         child: BlocConsumer<TransactionBloc, TransactionState>(
           listener: (context, state) {
             if (state is TransactionError) {
-              MHelperFunctions.showSnackBar("Error ${state.message}", context);
+              MHelperFunctions.showSnackBar(
+                message: state.message,
+                context: context,
+                title: "Error",
+                bgColor: Colors.red,
+                icon: Icons.error,
+              );
+            } else if (state is TransactionSuccess) {
+              MHelperFunctions.showSnackBar(
+                message: state.message,
+                context: context,
+                title: "Success",
+                bgColor: Colors.green,
+                icon: Icons.check_circle,
+              );
             }
           },
           builder: (context, state) {
@@ -43,16 +57,12 @@ class HomeScreen extends StatelessWidget {
                     title: 'Transactions',
                     showActionbutton: true,
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => AllTransactionScreen(),
-                        ),
-                      );
+                      MHelperFunctions.navigateToScreen(
+                          context, AllTransactionScreen());
                     },
                   ),
 
-                  const SizedBox(height: 20),
+                  const SizedBox(height: MSizes.sm),
 
                   // Transaction Tile
                   ListView.builder(

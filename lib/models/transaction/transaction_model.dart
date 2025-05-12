@@ -5,7 +5,7 @@ import 'package:money_tracker_app/models/enum/enum.dart';
 part 'transaction_model.g.dart';
 
 @HiveType(typeId: 1)
-class TransactionModel {
+class TransactionModel extends HiveObject {
   @HiveField(0)
   String tId;
 

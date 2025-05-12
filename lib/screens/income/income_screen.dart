@@ -21,7 +21,21 @@ class IncomeScreen extends StatelessWidget {
       body: BlocConsumer<TransactionBloc, TransactionState>(
         listener: (context, state) {
           if (state is TransactionError) {
-            MHelperFunctions.showSnackBar("Error ${state.message}", context);
+            MHelperFunctions.showSnackBar(
+              message: state.message,
+              context: context,
+              title: "Error",
+              bgColor: Colors.red,
+              icon: Icons.error,
+            );
+          } else if (state is TransactionSuccess) {
+            MHelperFunctions.showSnackBar(
+              message: state.message,
+              context: context,
+              title: "Success",
+              bgColor: Colors.green,
+              icon: Icons.check_circle,
+            );
           }
         },
         builder: (context, state) {

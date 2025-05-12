@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:money_tracker_app/screens/main_screen.dart';
-import 'package:money_tracker_app/utils/theme.dart';
+import 'package:money_tracker_app/utils/theme/theme.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

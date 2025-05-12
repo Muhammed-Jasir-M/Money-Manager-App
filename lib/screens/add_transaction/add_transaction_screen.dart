@@ -57,13 +57,24 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
             isLoading = false;
           });
           MHelperFunctions.showSnackBar(
-              'Transaction Added Successfully', context);
+            message: 'Transaction Added Successfully',
+            context: context,
+            title: "Success",
+            bgColor: Colors.green,
+            icon: Icons.check_circle,
+          );
           Navigator.pop(context);
         } else if (state is TransactionError) {
           setState(() {
             isLoading = false;
           });
-          MHelperFunctions.showSnackBar("Error: ${state.message}", context);
+          MHelperFunctions.showSnackBar(
+            message: state.message,
+            context: context,
+            title: "Error",
+            bgColor: Colors.red,
+            icon: Icons.error,
+          );
         }
       },
       child: SingleChildScrollView(
@@ -134,7 +145,12 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                                     isCategoryLoading = false;
                                   });
                                   MHelperFunctions.showSnackBar(
-                                      "Error: ${state.message}", context);
+                                    message: state.message,
+                                    context: context,
+                                    title: "Error",
+                                    bgColor: Colors.red,
+                                    icon: Icons.error,
+                                  );
                                   Navigator.pop(ctx);
                                 }
                               },
@@ -309,7 +325,12 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                             dateController.text.isEmpty ||
                             timeController.text.isEmpty) {
                           MHelperFunctions.showSnackBar(
-                              'Please fill all the fields', context);
+                            message: 'Please fill all the fields',
+                            context: context,
+                            title: "Error",
+                            bgColor: Colors.red,
+                            icon: Icons.error,
+                          );
                         } else {
                           BlocProvider.of<TransactionBloc>(context).add(
                             AddTransaction(

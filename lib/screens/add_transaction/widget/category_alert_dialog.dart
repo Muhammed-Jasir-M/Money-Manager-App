@@ -204,7 +204,12 @@ class _MCategoryAlertDialogState extends State<MCategoryAlertDialog> {
                   onTap: () {
                     if (titleController.text.isEmpty) {
                       MHelperFunctions.showSnackBar(
-                          "Please enter a title", context);
+                        message: 'Please fill all the fields',
+                        context: context,
+                        title: "Error",
+                        bgColor: Colors.red,
+                        icon: Icons.error,
+                      );
                     } else {
                       setState(() {
                         isCategoryLoading = true;
