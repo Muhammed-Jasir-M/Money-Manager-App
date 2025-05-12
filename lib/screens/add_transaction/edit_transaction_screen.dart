@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:money_tracker_app/screens/add_transaction/widget/transaction_form.dart';
 import 'package:money_tracker_app/widgets/appbar.dart';
 
-class AddTransactionScreen extends StatelessWidget {
-  const AddTransactionScreen({super.key});
+class EditTransactionScreen extends StatelessWidget {
+  const EditTransactionScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,13 +13,13 @@ class AddTransactionScreen extends StatelessWidget {
         appBar: MAppBar(
           showBackArrow: true,
           title: Text(
-            'Add Transaction',
+            'Edit Transaction',
             style: Theme.of(context).textTheme.titleLarge,
           ),
         ),
 
         /// Body
-        body: const MTransactionForm(isEditing: false),
+        body: const MTransactionForm(isEditing: true),
       ),
     );
   }
