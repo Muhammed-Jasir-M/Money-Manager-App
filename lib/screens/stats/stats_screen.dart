@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:money_tracker_app/screens/expense/views/expense_screen.dart';
-import 'package:money_tracker_app/screens/income/views/income_screen.dart';
+import 'package:money_tracker_app/screens/expense/expense_screen.dart';
+import 'package:money_tracker_app/screens/income/income_screen.dart';
 import 'package:money_tracker_app/utils/constants/colors.dart';
 import 'package:money_tracker_app/utils/constants/sizes.dart';
 import 'package:money_tracker_app/utils/helper_functions.dart';
@@ -54,7 +54,8 @@ class _StatsScreenState extends State<StatsScreen>
                         controller: tabController,
                         indicatorColor:
                             isDark ? MColors.primary : MColors.secondary,
-                        labelColor: isDark ? MColors.secondary : MColors.primary,
+                        labelColor:
+                            isDark ? MColors.secondary : MColors.primary,
                         unselectedLabelColor:
                             isDark ? MColors.secondary : MColors.primary,
                         dividerHeight: 0,

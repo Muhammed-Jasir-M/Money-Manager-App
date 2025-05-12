@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:money_tracker_app/blocs/transaction/transaction_bloc.dart';
-import 'package:money_tracker_app/data/data.dart';
 import 'package:money_tracker_app/models/enum/enum.dart';
 import 'package:money_tracker_app/utils/constants/sizes.dart';
 
-import '../../../utils/constants/colors.dart';
-import '../../../utils/helper_functions.dart';
-import '../../../widgets/transaction_tile.dart';
-import '../widgets/chart.dart';
+import '../../data/data.dart';
+import '../../utils/constants/colors.dart';
+import '../../utils/helper_functions.dart';
+import '../../widgets/transaction_tile.dart';
+import 'widgets/chart.dart';
 
-class IncomeScreen extends StatelessWidget {
-  const IncomeScreen({super.key});
+class ExpenseScreen extends StatelessWidget {
+  const ExpenseScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +28,9 @@ class IncomeScreen extends StatelessWidget {
           if (state is TransactionLoading) {
             return Center(child: CircularProgressIndicator());
           } else if (state is TransactionLoaded) {
-            final incomeTransactions = state.transactions
-                .where(
-                    (transaction) => transaction.type == TransactionType.income)
+            final expenseTransactions = state.transactions
+                .where((transaction) =>
+                    transaction.type == TransactionType.expense)
                 .toList();
 
             return SingleChildScrollView(
@@ -57,9 +57,9 @@ class IncomeScreen extends StatelessWidget {
                     child: ListView.builder(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
-                      itemCount: incomeTransactions.length,
+                      itemCount: expenseTransactions.length,
                       itemBuilder: (context, index) {
-                        final transaction = incomeTransactions[index];
+                        final transaction = expenseTransactions[index];
                         return MTransactionTile(
                           icon: categoryIcons[transaction.category.iconIndex],
                           title: transaction.category.title,

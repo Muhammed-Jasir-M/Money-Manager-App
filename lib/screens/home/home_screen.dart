@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:money_tracker_app/blocs/transaction/transaction_bloc.dart';
 import 'package:money_tracker_app/data/data.dart';
-import 'package:money_tracker_app/screens/all_transaction/views/all_transaction_screen.dart';
+import 'package:money_tracker_app/screens/all_transaction/all_transaction_screen.dart';
 import 'package:money_tracker_app/screens/home/widgets/gradient_card.dart';
 import 'package:money_tracker_app/screens/home/widgets/home_appbar.dart';
 import 'package:money_tracker_app/utils/constants/sizes.dart';

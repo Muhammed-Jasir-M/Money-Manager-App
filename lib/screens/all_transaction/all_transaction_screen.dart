@@ -4,11 +4,11 @@ import 'package:money_tracker_app/blocs/transaction/transaction_bloc.dart';
 import 'package:money_tracker_app/data/data.dart';
 import 'package:money_tracker_app/widgets/appbar.dart';
 
-import '../../../utils/constants/colors.dart';
-import '../../../utils/constants/sizes.dart';
-import '../../../utils/helper_functions.dart';
-import '../../../widgets/transaction_tile.dart';
-import '../../stats/widgets/chart.dart';
+import '../../utils/constants/colors.dart';
+import '../../utils/constants/sizes.dart';
+import '../../utils/helper_functions.dart';
+import '../../widgets/transaction_tile.dart';
+import '../stats/widgets/chart.dart';
 
 class AllTransactionScreen extends StatelessWidget {
   const AllTransactionScreen({super.key});
