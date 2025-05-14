@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:money_tracker_app/blocs/transaction/transaction_bloc.dart';
 import 'package:money_tracker_app/data/data.dart';
 import 'package:money_tracker_app/models/enum/enum.dart';
-import 'package:money_tracker_app/screens/tabbar_tabs/widgets/chart.dart';
+import 'package:money_tracker_app/screens/tabbar_tabs/widgets/chart_slider.dart';
 import 'package:money_tracker_app/utils/constants/sizes.dart';
 
 import '../../utils/constants/colors.dart';
@@ -73,7 +73,7 @@ class IncomeScreen extends StatelessWidget {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(12, 20, 12, 12),
-                      child: MBarChart(
+                      child: ChartSlider(
                         transactions: incomeTransactions,
                         type: TransactionType.income,
                       ),

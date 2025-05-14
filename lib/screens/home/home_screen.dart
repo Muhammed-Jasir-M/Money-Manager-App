@@ -17,8 +17,9 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final transactionState = context.read<TransactionBloc>().state;
-    final transactions = (transactionState as TransactionLoaded).transactions;
+    final transactions =
+        (context.read<TransactionBloc>().state as TransactionLoaded)
+            .transactions;
 
     final totals = _calculateTotals(transactions);
 

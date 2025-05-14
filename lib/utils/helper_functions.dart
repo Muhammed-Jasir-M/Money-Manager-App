@@ -130,12 +130,16 @@ class MHelperFunctions {
     }
   }
 
-  static String formatCurrencyCompact(double amount) {
+  static String formatCurrency(double amount) {
     if (amount >= 1000000) {
       return '${(amount / 1000000).toStringAsFixed(1)}M';
     } else if (amount >= 1000) {
       return '${(amount / 1000).toStringAsFixed(1)}K';
     }
     return amount.toStringAsFixed(0);
+  }
+
+  static String formatDate(DateTime date) {
+    return '${date.day}/${date.month}/${date.year}';
   }
 }
