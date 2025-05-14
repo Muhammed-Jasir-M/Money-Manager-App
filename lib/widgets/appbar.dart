@@ -13,9 +13,11 @@ class MAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.actions,
     this.leadingOnPressed,
     this.leadingWidget,
+    this.titleSpacing = 0,
   });
 
   final Widget? title;
+  final double titleSpacing;
   final bool showBackArrow, centerTitle;
   final IconData? leadingIcon;
   final List<Widget>? actions;
@@ -27,7 +29,7 @@ class MAppBar extends StatelessWidget implements PreferredSizeWidget {
     final isDark = MHelperFunctions.isDarkMode(context);
 
     return AppBar(
-      titleSpacing: 0,
+      titleSpacing: titleSpacing,
       elevation: 0,
       centerTitle: centerTitle,
       automaticallyImplyLeading: false,

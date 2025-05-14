@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:money_tracker_app/blocs/transaction/transaction_bloc.dart';
+import 'package:money_tracker_app/data/data.dart';
 import 'package:money_tracker_app/models/enum/enum.dart';
-import 'package:money_tracker_app/screens/stats/widgets/chart.dart';
+import 'package:money_tracker_app/screens/tabbar_tabs/widgets/chart.dart';
 import 'package:money_tracker_app/utils/constants/sizes.dart';
 
-import '../../data/data.dart';
 import '../../utils/constants/colors.dart';
 import '../../utils/helper_functions.dart';
 import '../../widgets/transaction_tile.dart';
 
-class ExpenseScreen extends StatelessWidget {
-  const ExpenseScreen({super.key});
+class IncomeScreen extends StatelessWidget {
+  const IncomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -56,9 +56,9 @@ class ExpenseScreen extends StatelessWidget {
               );
             }
 
-            final expenseTransactions = transactions
-                .where((transaction) =>
-                    transaction.type == TransactionType.expense)
+            final incomeTransactions = transactions
+                .where(
+                    (transaction) => transaction.type == TransactionType.income)
                 .toList();
 
             return SingleChildScrollView(
@@ -74,8 +74,8 @@ class ExpenseScreen extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(12, 20, 12, 12),
                       child: MBarChart(
-                        transactions: expenseTransactions,
-                        type: TransactionType.expense,
+                        transactions: incomeTransactions,
+                        type: TransactionType.income,
                       ),
                     ),
                   ),
@@ -88,9 +88,9 @@ class ExpenseScreen extends StatelessWidget {
                     child: ListView.builder(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
-                      itemCount: expenseTransactions.length,
+                      itemCount: incomeTransactions.length,
                       itemBuilder: (context, index) {
-                        final transaction = expenseTransactions[index];
+                        final transaction = incomeTransactions[index];
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:money_tracker_app/screens/stats/expense_screen.dart';
-import 'package:money_tracker_app/screens/stats/income_screen.dart';
+import 'package:money_tracker_app/screens/tabbar_tabs/expense_screen.dart';
+import 'package:money_tracker_app/screens/tabbar_tabs/income_screen.dart';
 import 'package:money_tracker_app/utils/constants/colors.dart';
 import 'package:money_tracker_app/utils/constants/sizes.dart';
 import 'package:money_tracker_app/utils/helper_functions.dart';

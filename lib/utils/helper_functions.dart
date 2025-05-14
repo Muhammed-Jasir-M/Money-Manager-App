@@ -110,21 +110,32 @@ class MHelperFunctions {
   }
 
   static String formatDateHeader(String dateString) {
-    final date = DateTime.parse(dateString);
+    try {
+      final date = DateTime.parse(dateString);
+      final now = DateTime.now();
+      final today = DateTime(now.year, now.month, now.day);
+      final yesterday = today.subtract(const Duration(days: 1));
 
-    final today = DateTime.now();
-    final yesterday = today.subtract(const Duration(days: 1));
+      final inputDate = DateTime(date.year, date.month, date.day);
 
-    if (date.year == today.year &&
-        date.month == today.month &&
-        date.day == today.day) {
-      return 'Today';
-    } else if (date.year == yesterday.year &&
-        date.month == yesterday.month &&
-        date.day == yesterday.day) {
-      return 'Yesterday';
-    } else {
-      return DateFormat('MMM dd, yyyy').format(date);
+      if (inputDate == today) {
+        return 'Today';
+      } else if (inputDate == yesterday) {
+        return 'Yesterday';
+      } else {
+        return DateFormat('MMM d, y').format(date);
+      }
+    } catch (e) {
+      return dateString;
     }
+  }
+
+  static String formatCurrencyCompact(double amount) {
+    if (amount >= 1000000) {
+      return '${(amount / 1000000).toStringAsFixed(1)}M';
+    } else if (amount >= 1000) {
+      return '${(amount / 1000).toStringAsFixed(1)}K';
+    }
+    return amount.toStringAsFixed(0);
   }
 }

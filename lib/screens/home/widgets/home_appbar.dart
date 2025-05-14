@@ -10,6 +10,7 @@ class MHomeAppbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return MAppBar(
       centerTitle: false,
+      titleSpacing: 8,
       leadingWidget: Stack(
         alignment: Alignment.center,
         children: [

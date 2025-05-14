@@ -19,8 +19,11 @@ import 'package:money_tracker_app/widgets/text_form_field.dart';
 import 'package:money_tracker_app/widgets/transaction_tile.dart';
 
 class MTransactionForm extends StatefulWidget {
-  const MTransactionForm(
-      {super.key, this.transaction, required this.isEditing});
+  const MTransactionForm({
+    super.key,
+    this.transaction,
+    required this.isEditing,
+  });
 
   final TransactionModel? transaction;
   final bool isEditing;
@@ -121,9 +124,18 @@ class _MTransactionFormState extends State<MTransactionForm> {
                 isOpened: isExpanded,
                 suffixIcon: FontAwesomeIcons.plus,
                 onTap: () => setState(() => isExpanded = !isExpanded),
-                onIconPressed: () {
-                  MHelperFunctions.navigateToScreen(
-                      context, AddCategoryScreen());
+                onIconPressed: () async {
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AddCategoryScreen(),
+                    ),
+                  );
+
+                  if (mounted) {
+                    // ignore: use_build_context_synchronously
+                    context.read<CategoryBloc>().add(LoadCategories());
+                  }
                 },
               ),
 
@@ -230,7 +242,7 @@ class _MTransactionFormState extends State<MTransactionForm> {
 
               /// Date TextField
               MTextFormField(
-                hintText: 'Date',
+                hintText: _selectedDate,
                 prefixIcon: FontAwesomeIcons.calendar,
                 readOnly: true,
                 onTap: () async {
@@ -253,7 +265,7 @@ class _MTransactionFormState extends State<MTransactionForm> {
 
               /// Time TextField
               MTextFormField(
-                hintText: 'Time',
+                hintText: _selectedTime,
                 prefixIcon: FontAwesomeIcons.clock,
                 readOnly: true,
                 onTap: () async {
